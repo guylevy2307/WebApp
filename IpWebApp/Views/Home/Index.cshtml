@@ -1,0 +1,139 @@
+﻿@model IEnumerable<IpWebApp.Models.Task>
+@using Microsoft.AspNet.Identity
+@using IpWebApp.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="~/Content/index-page.css">
+
+
+<main class="container">
+    <div class="row">
+        <h2 class="page-heading-font-size normal-font-style" style="padding-left:0px">Hello <span id="name">@User.Identity.GetUserName()</span></h2>
+    </div>
+    <div class="row">
+        <div class="tasks panel">
+
+            @if (Model.Count(x => x.Status == IpWebApp.Models.TaskStatus.Pending) > 0)
+            {
+                <div class="tasks-upcoming">
+                    <div class="heading">
+                        <h3 class="page-heading-font-size normal-font-style">Here are your Upcoming Tasks</h3>
+                    </div>
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="home-col-field normal-font-style home-col-heading">Title</th>
+                                <th scope="col" class="home-col-field normal-font-style home-col-heading">Record</th>
+                                <th scope="col" class="home-col-field normal-font-style home-col-heading">Client</th>
+                                <th scope="col" class="home-col-field normal-font-style home-col-heading">Deadline</th>
+                                <th scope="col" class="home-col-field normal-font-style home-col-heading">Status</th>
+                                <th scope="col" class="empty home-col-field normal-font-style home-col-heading"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+
+                            @foreach (var item in Model)
+                                {
+
+                                <tr>
+                                    <td class="col-3">@Html.ActionLink(item.Title, "Details", "Task", new { id = item.TaskId }, htmlAttributes: null) </td>
+                                    @*<td class="col-2">@Html.DisplayFor(modelItem => item.Record.Name)</td>*@
+                                    <td class="col-2">@Html.ActionLink(item.Record.Name, "Details", "Record", new { id = item.Record.RecordId }, htmlAttributes: null)</td>
+
+                                     @*<td class="col-2">@Html.DisplayFor(modelItem => item.Record.Client.Name)</td>*@
+                                    <td class="col-2">@Html.ActionLink(item.Record.Client.Name, "Details", "Client", new { id = item.Record.Client.ClientId }, htmlAttributes: null)</td>
+                                    @if (item.Deadline < DateTime.Now && item.Status == IpWebApp.Models.TaskStatus.Pending)
+                                    {
+                                        <td class="col-2 tasks-overdue home-col-field normal-font-style home-col-font-weight">@Convert.ToDateTime(item.Deadline).ToString("dd/MM/yyyy")</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td class="col-2 home-col-field normal-font-style home-col-font-weight">@Convert.ToDateTime(item.Deadline).ToString("dd/MM/yyyy")</td>
+
+                                    }
+                                    <td class="col-3 home-col-field normal-font-style home-col-font-weight">@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td class="table-row-menu icons ">
+                                        <a href="@Url.Action("Details", "Task", new { id = item.TaskId })">
+                                            <img src="~/Images/edit.svg" alt="edit">
+                                        </a>
+                                        <a href="@Url.Action("Delete", "Task", new { id = item.TaskId })">
+                                            <img src="~/Images/delete.svg" alt="delete">
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+                                }
+        </div>
+    </div>
+    <div class="row recent">
+        <div class="col panel panel-half">
+            <div class="recent-clinets">
+                <div class="heading">
+                    <h3 class="page-heading-font-size normal-font-style">Recent Clients</h3>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="home-col-field normal-font-style home-col-heading">Client Name</th>
+                            <th scope="col" class="home-col-field normal-font-style home-col-heading">Contact email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cli in ViewData["Clients"] as List<Client>)
+                        {
+
+                            <tr>
+                                <td class="col ">
+                                    @Html.ActionLink(cli.Name, "Details", "Client" , new { id = cli.ClientId }, null)
+                                </td>
+                                <td class="col home-col-field normal-font-style home-col-font-weight">@cli.ContactEmail</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col panel panel-half">
+            <div class="recent-records">
+                <div class="heading">
+                    <h3 class="page-heading-font-size normal-font-style">Recent Records</h3>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="home-col-field normal-font-style home-col-heading">Title</th>
+                            <th scope="col" class="home-col-field normal-font-style home-col-heading">Type</th>
+                            <th scope="col" class="home-col-field normal-font-style home-col-heading">Client Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rec in ViewData["Records"] as List<Record>)
+                        {
+
+                            <tr>
+                                <td class="col">@Html.ActionLink(rec.Name, "Details", "Record", new { id = rec.RecordId }, new { })</td>
+                                <td class="col home-col-field normal-font-style home-col-font-weight">@rec.Type</td>
+                                <td class="col home-col-field normal-font-style home-col-font-weight">@rec.Client.Name.ToString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

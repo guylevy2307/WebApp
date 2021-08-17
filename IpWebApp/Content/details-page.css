@@ -1,0 +1,97 @@
+.form-panel-details {
+    margin-top: 4px;
+    padding: 30px 35px 45px;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.22);
+    background-color: #ffffff;
+    max-width: 1280px;
+}
+
+.form-tab-details {
+    margin-top: 45px;
+    background-color: #ffffff;
+    color: #656565;
+}
+
+.heading {
+    margin-bottom: 15px;
+}
+
+input, textarea, select {
+    border: none !important;
+    border-bottom: 1px solid #979797 !important;
+    border-radius: 0 !important;
+    color: #000 !important;
+}
+
+    input[type="text"]:disabled {
+        background-color: white !important;
+    }
+
+    input[type="checkbox"]:disabled {
+        background-color: white !important;
+    }
+
+.second-col-wrapper {
+    margin-left: 35px;
+}
+
+.description {
+    width: 100%;
+    height: 205px;
+    padding: 10px;
+    resize: none;
+    color: black !important;
+}
+
+.form-submit {
+    margin-top: 30px;
+}
+
+.subtasks {
+    margin: 30px 0 10px;
+}
+
+.heading a {
+    color: #1d1fff;
+}
+
+tr th, tr td {
+    border-bottom-color: #979797 !important;
+}
+
+#client-name, #applicant-name, .record-detail-heading, .task-detail-heading {
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.nav-tabs li a.active {
+    color: #1d1fff !important;
+    background-color: inherit;
+    border-color: transparent transparent #1d1fff;
+    font-weight: inherit !important;
+    border-bottom: 4px solid;
+}
+
+.nav-tabs li {
+    width: 150px;
+}
+
+    .nav-tabs li a {
+        display: inline-block;
+        width: inherit;
+        text-align: center;
+        font-family: Rubik;
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        margin: 0px;
+        padding-bottom: 12px
+    }
+
+.nav.nav-tabs.navbar-brand {
+    margin-left: 0px;
+}

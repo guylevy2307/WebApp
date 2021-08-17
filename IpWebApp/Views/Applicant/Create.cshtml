@@ -1,0 +1,92 @@
+﻿@model IpWebApp.Models.Applicant
+
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" href="~/Content/create-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <main class="container">
+
+        <div class="row">
+            <div class="back">
+                <a href="@Url.Action("Index", "Applicant", "Applicant")">< Applicants</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="heading page-heading-font-size create-applicant-heading">Create New Applicant</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="form-panel-create">
+                <form id="add-client-form">
+                    <div class="row">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ApplicantName, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.ApplicantName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ApplicantName, "", new { @class = "text-danger" })
+
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.POA, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.POA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.POA, "", new { @class = "text-danger" })
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-6 second-col-wrapper">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Formation, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.Formation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Formation, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-submit d-flex justify-content-center" style="margin-top:50px">
+                                <input type="submit" value="Create" class="btn-submit" />
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </main>
+
+}
+

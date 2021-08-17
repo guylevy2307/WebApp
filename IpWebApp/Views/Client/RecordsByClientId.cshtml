@@ -1,0 +1,70 @@
+﻿@model IEnumerable<IpWebApp.Models.Record>
+
+@{
+    ViewBag.Title = "RecordsByClientId";
+
+}
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+<main class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <h1> @Html.DisplayFor(modelItem => item.Client.Name) Records' list</h1>
+            break;
+        }
+    </div>
+
+    <div class="row">
+        <div class="records table-list panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Title</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Client Name</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Record Type</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Registration Num.</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Next Action Date</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Image</th>
+                        <th scope="col" class="empty"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="col pt-3">@Html.ActionLink(item.Name, "Details", new { id = item.RecordId })</td>
+                            @*<td class="col pt-3">@Html.ActionLink(item.Name, "Details", new { id = item.RecordId }, new { @class = " form-text-color normal-font-style table-data-font-size" })</td>*@
+                            <td class="col pt-3">@Html.ActionLink(item.Client.Name, "Details", "Client", new { id = item.Client.ClientId }, new { @class = " form-text-color normal-font-style table-data-font-size" })</td>
+                            <td class="col form-text-color normal-font-style table-data-font-size pt-3">@Html.DisplayFor(modelItem => item.Type)</td>
+                            <td class="col form-text-color normal-font-style table-data-font-size pt-3">@Html.DisplayFor(modelItem => item.RegistrationNumber)</td>
+                            <td class="col form-text-color normal-font-style table-data-font-size pt-3">
+                                @Convert.ToDateTime(item.NextActionDate).ToString("dd/MM/yyyy")
+                            </td>
+                            <td class=" pt-3">
+                                @if (item.Image == null || item.Image.Length == 0)
+                                {
+                                    <img type="hidden" />
+                                }
+                                else
+                                {
+                                    <img src="/Record/RetrieveImage/@item.RecordId" alt="" height=100 width=200 />
+                                }
+                            </td>
+
+                            <td class="table-row-menu icons">
+                                <a href="@Url.Action("Details", "Record", new { id = item.RecordId })">
+                                    <img src="~/Images/edit.svg" alt="edit">
+                                </a>
+                                <a href="@Url.Action("Delete", "Record", new { id = item.RecordId })">
+                                    <img src="~/Images/delete.svg" alt="delete">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>

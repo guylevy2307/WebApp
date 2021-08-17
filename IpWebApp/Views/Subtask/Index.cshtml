@@ -1,0 +1,77 @@
+﻿@model IEnumerable<IpWebApp.Models.Subtask>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<link rel="stylesheet" href="~/Content/create-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<main class="container">
+    <div class="row">
+        <h2>Subtask</h2>
+        <div class="back">
+            <a href="@Url.Action("Index", "Task", "Task")">< Tasks</a>
+        </div>
+    </div>
+<div class="records table-list panel">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainTaskId)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+              
+                    @Html.ActionLink( item.Title, "Details", new { id=item.SubtaskId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainTaskId)
+                </td>
+                <td class="col">
+                    <a href="@Url.Action("Details", "Subtask", new { id = item.SubtaskId })">
+                        <img src="~/Images/edit.svg" alt="edit">
+                    </a>
+                    <a href="@Url.Action("Delete", "Subtask", new { id = item.SubtaskId })">
+                        <img src="~/Images/delete.svg" alt="delete">
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+</main>

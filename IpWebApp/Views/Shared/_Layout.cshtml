@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - By Cligal</title>
+
+    <link rel="stylesheet" href="~/Content/style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <style>
+        /* Style the buttons */
+        .btn {
+            color: white;
+        }
+
+            /* Style the active class, and buttons on mouse-over */
+            .active, .btn:hover {
+                background-color: #666;
+                color: white;
+                font-weight: bold;
+            }
+    </style>
+
+</head>
+
+<body style="background:#F6F7F8">
+    <div class="container-xxxl container-fluid" style="padding-right:0px;padding-left:0px;">
+        <header>
+            <div class="row header-height" style="margin-right:0px;margin-left:0px">
+                <!--
+                <div class="col-1 logo">
+                    <a href="#">
+                        <!-- <img src="https://via.placeholder.com/115x51" alt="">
+                        </a>
+                    </div>
+                    -->
+                <div class="row" style="padding-right:0px;padding-left:0px;margin-right:0px;margin-left:0px">
+                    <div class="flex-column px-0 header-height bg-white" style="width:10%">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="~/Images/i-pwebapp-logo.svg" class="pt-3" style="padding-left:20px">
+                        </a>
+                    </div>
+                    <div class="flex-column" style="width:90%; padding-left:0px; padding-right:0px">
+                        <div class="col nav-wrapper d-flex justify-content-between header-height">
+                            <nav class="nav d-flex align-items-center">
+
+                                <a class="nav-btn header-client-link " href="@Url.Action("Index", "Client", "Client")">Clients</a>
+                                <a class="nav-btn header-applicant-link " href="@Url.Action("Index", "Applicant", "Applicant")">Applicants</a>
+                                <a class="nav-btn header-record-link " href="@Url.Action("Index", "Record", "Record")">Records</a>
+                                <a class="nav-btn header-task-link " href="@Url.Action("Index", "Task", "Task")">Tasks</a>
+                                <a class="nav-btn header-task-link " href="@Url.Action("Index", "Locations", "Locations")">Locations</a>
+
+                                @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
+
+                                @*<a class="nav-btn" href="@Url.Action("Index", "TamplateTasks", "TamplateTasks")">Tamplate Task</a>*@
+                                <!--
+                                -->
+                                <!--@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })-->
+                            </nav>
+                            <div class="user d-flex align-items-center" style="margin-right:39px">
+                                <span id="email" class="email"></span>
+                                <a class="nav-btn" href="@Url.Action("Settings", "Home")">
+                                    <img src="~/Images/settings-icon.svg">
+                                </a>
+                                <div class="profile-div">
+                                    <div role="button" id="dropdownLogOffButton" data-toggle="dropdown" data-offset="15 10" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/Images/user.svg" alt="user icon">
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownLogOffButton">
+
+                                            <a class="dropdown-item" href="@Url.Action("Login", "Account")">Log Off</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu dropleft d-flex justify-content-end">
+                                <div class="add-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" data-offset="15 10" aria-haspopup="true" aria-expanded="false">
+                                    <span>+</span>
+                                </div>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="@Url.Action("Create", "Client")">Add Client</a>
+                                    <a class="dropdown-item" href="@Url.Action("Create", "Record")">Add Record</a>
+                                    <a class="dropdown-item" href="@Url.Action("Create", "Task")">Add Task</a>
+                                    <a class="dropdown-item" href="@Url.Action("Create", "TamplateTasks")">Add Tamplate Task</a>
+                                    <a class="dropdown-item" href="@Url.Action("Create", "Locations")">Add Location </a>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Upload")">Add Data</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+        </header>
+
+        <div class="container" >
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Cligal</p>
+            </footer>
+        </div>
+
+      @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+
+    <script>
+        (function () {
+            let navBtns = document.getElementsByClassName('nav-btn');
+
+            Array.from(navBtns).forEach(btn => btn.addEventListener('click', (e) => {
+                //e.preventDefault();
+                const activeBtn = document.querySelector('.nav-btn.active');
+                activeBtn.classList.toggle('active');
+                btn.classList.toggle('active');
+            }));
+        })();
+    </script>
+
+
+
+    @*<script>
+            document.querySelector('#myDIV a').addEventListener('click', function (event) {
+                // Do something before following the link
+
+                // Get url from the target element (<a>) href attribute
+                var url = event.target.href;
+
+                // Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
+                window.open(url, '_blank');
+
+                // Prevent default action (e.g. following the link)
+                event.preventDefault();
+            });
+
+
+
+        </script>*@
+
+    @*<script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("myDIV");
+            var btns = header.getElementsByClassName("btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function (event) {
+                    var url = event.target.href;
+                    //event.preventDefault();
+
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+
+                    //window.location.href = url;
+                    //window.open(url, '_self');
+                });
+            }
+        </script>*@
+
+
+    <!--
+
+    <script>
+        // Add active class to the current button (highlight it)
+        var header = document.getElementsByClassName("nav d-flex align-items-center");
+        var btns = header.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+        -->
+</body>
+</html>
+
+
+

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<IpWebApp.Models.Task>
+
+@{
+    ViewBag.Title = "TasksByClientId";
+}
+
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+
+<main class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        { 
+        <h1> @Html.DisplayFor(modelItem => item.Record.Client.Name) Tasks' list</h1>
+            break;
+        }
+        </div>
+    <div class="row">
+        <div class="tasks table-list panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Client Name</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Pricing</th>
+                        <th scope="col">Subtask</th>
+                        <th scope="col" class="empty"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        double sum = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="col">@Html.ActionLink(item.Title, "Details", new { id = item.TaskId })</td>
+                            <td class="col">@Html.ActionLink(item.Record.Client.Name, "Details", "Client", new { id = item.Record.ClientId }, htmlAttributes: null)</td>
+                            <td class="col">@Html.DisplayFor(modelItem => item.Deadline)</td>
+                            <td class="col">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="col">@Html.DisplayFor(modelItem => item.Pricing)</td>
+                            @{
+                                sum += item.Pricing;
+                            }
+                            <td class="col">
+
+                                @if (item.Subtasks.Count > 0)
+                                {
+                                    <a href="@Url.Action("Details", "Subtask", new { id = item.Subtasks.First().SubtaskId })">
+                                        @item.Subtasks.First().SubtaskId
+                                    </a>
+
+                                    if (item.Subtasks.Count > 1)
+                                    {
+                                        <a href="@Url.Action("SubtaskByTaskId", "Task", new { id = item.TaskId })">
+                                            @item.Subtasks.Count
+                                        </a>
+                                    }
+                                }
+
+
+                            </td>
+                            <td class="table-row-menu icons">
+                                <a href="@Url.Action("Edit", "Task", new { id = item.TaskId })">
+                                    <img src="~/Images/edit.svg" alt="edit">
+                                </a>
+                                <a href="@Url.Action("Delete", "Task", new { id = item.TaskId })">
+                                    <img src="~/Images/delete.svg" alt="delete">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <td >Total sum is: @sum </td>
+            </table>
+
+        </div>
+    </div>
+</main>

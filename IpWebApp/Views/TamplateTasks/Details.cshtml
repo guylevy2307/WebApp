@@ -1,0 +1,85 @@
+﻿@model IpWebApp.Models.TamplateTask
+
+@{
+    ViewBag.Title = "Details";
+}
+<link rel="stylesheet" href="~/Content/details-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+
+<main class="container">
+    <div class="row">
+        <div class="back">
+            <a href="@Url.Action("Index", "TamplateTasks", "TamplateTasks")">< TamplateTasks</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h2><span id="client-name">@Html.DisplayFor(model => model.Title) Details</span></h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-panel-details">
+            @using (Html.BeginForm("Edit", "TamplateTasks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row edit-task-form">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TamplateTaskId)
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="Title" class="form-label-font-size normal-font-style">Title</label>
+                            <input name="Title" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="title" value="@Html.DisplayFor(model => model.Title)">
+                        </div>
+                        <div class="form-group">
+
+                            <label for="Pricing" class="form-label-font-size normal-font-style">Pricing</label>
+                            <input name="Pricing" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="Pricing" value="@Html.DisplayFor(model => model.Pricing)">
+                        </div>
+
+                        <div class="form-group">
+
+                            <label  class="form-label-font-size normal-font-style">Date Type</label>
+                            <div class="form-group" >
+                            @Html.EnumDropDownListFor(model => model.dateType, htmlAttributes: new { @class = " mt-2 px-0 ",  id = "dateType", name = "dateType" })
+                            </div>
+                            </div>
+
+                    </div>
+                    <div class="col">
+                        
+                        <div class="form-group">
+                            <label for="AddDays" class="form-label-font-size normal-font-style">Days Added</label>
+                            <input name="AddDays"  type="number" class="form-control form-field-font-size mt-2 pb-2 px-0" id="AddDays" value="@Html.DisplayFor(model => model.AddDays)">
+                        </div>
+                        <div class="form-group">
+                            <label for="AddMonths" class="form-label-font-size normal-font-style">Months Added</label>
+                            <input name="AddMonths"  type="number" class="form-control form-field-font-size mt-2 pb-2 px-0" id="AddMonths" value="@Html.DisplayFor(model => model.AddMonths)">
+                        </div>
+                        <div class="form-group">
+                            <label for="AddYears" class="form-label-font-size normal-font-style">Years Added</label>
+                            <input name="AddYears"  type="number" class="form-control form-field-font-size mt-2 pb-2 px-0" id="AddYears" value="@Html.DisplayFor(model => model.AddYears)">
+                        </div>
+                       
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="Description" class="form-label-font-size normal-font-style">Description</label>
+                            <textarea name="Description" class="description field-border w-100" id="Description" style="height:175px">@Html.DisplayFor(model => model.Description)</textarea>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="form-submit d-flex   col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn-submit" />
+                        </div>
+                    </div>
+
+                </div>
+            }
+    </div>
+            </div>
+        </main>
+         

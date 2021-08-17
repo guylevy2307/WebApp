@@ -1,0 +1,294 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-color: #f6f7f8;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+}
+
+/* Override bootsrap styles */
+.dropdown-menu {
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.22);
+}
+
+
+/*.disable-select {*/
+/*    user-select: none; !* supported by Chrome and Opera *!*/
+/*    -webkit-user-select: none; !* Safari *!*/
+/*    -khtml-user-select: none; !* Konqueror HTML *!*/
+/*    -moz-user-select: none; !* Firefox *!*/
+/*    -ms-user-select: none; !* Internet Explorer/Edge *!*/
+/*}*/
+
+h2, h3 {
+    font-size: 26px;
+    font-weight: normal;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+
+.text-underline-none {
+    text-decoration: none;
+}
+
+/* Table style rules */
+.table {
+    position: relative;
+    color: #656565;
+}
+
+tr th {
+    font-weight: 500;
+    line-height: 19px;
+}
+
+tr td {
+    font-weight: 300;
+    line-height: 19px;
+}
+
+tr td {
+    border-bottom-color: #ebebeb !important;
+}
+
+td a {
+    color: #656565 !important;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    td a:hover {
+        color: #656565 !important;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+
+.table-row-menu {
+    display: none;
+    position: absolute;
+    border: none;
+    padding: 5px !important;
+}
+
+    .table-row-menu a {
+        text-decoration: none;
+        margin-left: 10px;
+    }
+
+tbody tr:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+tr:hover .table-row-menu {
+    display: block;
+}
+
+tr th.empty {
+    padding: 0;
+}
+
+
+/********************/
+/* Main style rules */
+/********************/
+
+.panel {
+    border-top: 8px solid #feefe8;
+    border-bottom: 8px solid white;
+    /*margin-top: 8px!important;*/
+    background-color: #fff;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.22);
+    overflow-y: scroll;
+}
+
+
+header {
+    color: #fff;
+    font-size: 16px;
+    position: relative;
+}
+
+.nav-wrapper {
+    background-color: #1d1fff;
+    /*height:6vh;*/
+}
+
+.logo {
+    min-width: 145px;
+    background-color: #fff;
+}
+
+    .logo img {
+        padding: 8px;
+    }
+
+.nav {
+    margin-left: 50px;
+}
+
+    .nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 10px;
+    }
+
+        .nav a:not(:first-child) {
+            margin-left: 27px;
+        }
+
+        .nav a.active {
+            font-weight: bold;
+        }
+
+        .nav a:hover {
+            color: #a1a1a1;
+        }
+
+.user {
+    margin-right: 30px;
+}
+
+    .user img {
+        margin-left: 18px;
+    }
+
+.menu {
+    position: absolute;
+    top: 90px;
+    right: 30px;
+    max-width: 100px !important;
+}
+
+.add-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #1d1fff;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    border: none;
+}
+
+    .add-btn:hover {
+        cursor: pointer;
+    }
+
+.dropdown-menu a {
+    color: #656565;
+}
+
+main {
+    margin-top: 35px;
+    margin-bottom: 30px;
+    color: #656565;
+}
+
+input[type="text"]:disabled {
+    background-color: white !important;
+}
+
+input[type="checkbox"]:disabled {
+    background-color: white !important;
+}
+
+.icons a:hover {
+    text-decoration: none !important;
+}
+
+.header-client-link:active, .header-applicant-link:active, .header-record-link:active, .header-task-link:active {
+    font-weight: bold;
+}
+
+.login, .register, .records {
+    font-weight: 500 !important;
+}
+
+.page-heading-font-size {
+    font-size: 26px !important;
+    height: 31px;
+}
+
+.font-family-rubik {
+    font-family: Rubik;
+}
+
+.local-account-text, .new-account-text {
+    font-size: 20px;
+    height: 24px;
+}
+
+.normal-font-style {
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    font-weight:normal;
+}
+
+.form-text-color {
+    color: #656565;
+}
+
+.form-label-font-size {
+    font-size: 12px;
+    height: 14px;
+}
+
+.remember-me-label, .forget-password-link, .register-new-user-link, .form-field-font-size, .home-col-field, .search-record-field, .record-table-heading, .add-applicant-label, .create-record-main-label {
+    font-size: 16px !important;
+    height: 19px;
+}
+
+.header-height {
+    height: 68px;
+}
+
+.home-col-heading, .record-table-heading, .create-record-heading, .create-applicant-heading {
+    font-weight: 500 !important;
+}
+
+.home-col-font-weight{
+    font-weight:300 !important;
+}
+
+.body-bg-color {
+    background: #F6F7F8
+}
+
+.field-border{
+    border: solid 1px #979797 !important;
+}
+
+.field-border-radius{
+    border-radius:0px !important;
+}
+
+.profile-div .dropdown-menu {
+    transform: none !important;
+    border-radius: 0px !important;
+    left: unset !important;
+    right: 40px !important;
+    top: 55px !important;
+}
+
+.profile-div .dropdown-item {
+    padding-left: 89px !important;
+    color: #1d1fff !important;
+}
+
+

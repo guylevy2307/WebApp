@@ -1,0 +1,37 @@
+﻿@model IpWebApp.Models.Record
+<link rel="stylesheet" href="~/Content/create-page.css">
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PriorityCountry, htmlAttributes: new { @class = "control-label form-label-font-size normal-font-style" })
+    <div class="col-md-12">
+        @Html.TextBoxFor(model => model.PriorityCountry, new { @class = "form-control", autocomplete = "off" })
+       @* @Html.TextBoxFor(model => model.PriorityCountry, new { @class = "form-control PriorityCountry form-field-font-size mt-2 pb-2 px-0", autocomplete = "off" })*@
+        @Html.ValidationMessageFor(model => model.PriorityCountry, "", new { @class = "text-danger " })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PriorityNumber, htmlAttributes: new { @class = "control-label form-label-font-size normal-font-style" })
+    <div class="col-md-12">
+        @Html.TextBoxFor(model => model.PriorityNumber, new { @class = "form-control", autocomplete = "off" })
+      @*  @Html.TextBoxFor(model => model.PriorityNumber, new { @class = "form-control PriorityNumber form-field-font-size mt-2 pb-2 px-0", autocomplete = "off" })*@
+        @Html.ValidationMessageFor(model => model.PriorityNumber, "", new { @class = "text-danger " })
+    </div>
+</div>
+
+@* another way to create the date picker. using jQuery later, to display the jQuery date picker for the field using the ".EnterDate" css class *@
+@*<div class="form-group">
+        @Html.LabelFor(model => model.PriorityDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.PriorityDate, new { @class = "form-control EnterDate", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.PriorityDate, "", new { @class = "text-danger PriorityDate" })
+        </div>
+    </div>*@
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PriorityDate, htmlAttributes: new { @class = "control-label form-label-font-size normal-font-style" })
+    <input name="PriorityDate" type="date" class="form-control" @*EnterDate"*@ id="priority-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.PriorityDate)">
+    <!--<input name="PriorityDate" type="date" class="form-control form-control w-100 form-field-font-size mt-2 pb-2 px-0"--> @*EnterDate"*@ <!--id="priority-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.PriorityDate)">-->
+    @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger " })
+</div>

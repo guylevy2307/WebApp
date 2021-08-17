@@ -1,0 +1,147 @@
+﻿@model IEnumerable<IpWebApp.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<link rel="stylesheet" href="~/Content/style.css">
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+
+
+
+<main class="container">
+    <div class="row">
+        <h2>Tasks</h2>
+        @using (Html.BeginForm("Index", "Task", FormMethod.Post))
+        {
+            <div class="filter d-flex">
+                @Html.TextBox("searchStr", null, new { placeholder = "Search a Task by Name", @class = "search-by" })
+                <span class="filter-icon">
+                    <input type="image" src="~/Images/filter.svg" />
+                </span>
+            </div>
+        }
+    </div>
+
+    <div class="row mt-4">
+        <div>
+            <style>
+                /* Style the active class, and buttons on mouse-over */
+                .btn:hover {
+                    background-color: #3363ff;
+                }
+
+                .nav-tabs li a.active  {
+                    color: #1d1fff !important;
+                    background-color: inherit;
+                    border-color: transparent transparent #1d1fff;
+                    font-weight: inherit !important;
+                    border-bottom: 4px solid;
+                }
+
+                .nav-tabs li {
+                    width: 179px;
+                }
+
+                    .nav-tabs li a {
+                        display: inline-block;
+                        width: inherit;
+                        text-align: center;
+                        font-family: Rubik;
+                        font-size: 16px;
+                        font-weight: normal;
+                        font-stretch: normal;
+                        font-style: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        text-align: center;
+                        margin: 0px;
+                        padding-bottom:12px
+                        
+                    }
+
+                .nav.nav-tabs.navbar-brand {
+                    margin-left: 0px;
+                }
+
+            </style>
+            @* tabs nav bar *@
+            <ul class="nav nav-tabs navbar-brand pb-0">
+                <li>
+                    <a href="#tab_1" data-toggle="tab" class="text-secondary active"> Tasks </a>
+                </li>
+                <li>
+                    <a href="#tab_2" data-toggle="tab" class="text-secondary"> Tasks Templates </a>
+                </li>
+            </ul>
+
+            @* tab content *@
+            <div class="tab-content">
+                <div class="tab-pane  active form-tab-details " id="tab_1">
+                    @* regular task list but under a tab *@
+                    <div>
+                        <div class="tasks table-list panel">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Client Name</th>
+                                        <th scope="col">Deadline</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Assignee</th>
+                                        <th scope="col">Pricing</th>
+                                        <th scope="col">Subtask</th>
+                                        <th scope="col" class="empty"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td class="col">@Html.ActionLink(item.Title, "Details", new { id = item.TaskId })</td>
+
+                                            <td class="col">@Html.ActionLink(item.Record.Client.Name, "Details", "Client", new { id = item.Record.ClientId }, htmlAttributes: null)</td>
+
+
+
+                                            <td class="col"> @Convert.ToDateTime(item.Deadline).ToString("dd/MM/yyyy")</td>
+                                            <td class="col">@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td class="col">@Html.DisplayFor(modelItem => item.Assignee)</td>
+                                            <td class="col">@Html.DisplayFor(modelItem => item.Pricing)</td>
+                                            <td class="col">
+                                                Total: <a href="@Url.Action("SubtaskByTaskId", "Task", new { id = item.TaskId })">
+                                                    @item.Subtasks.Count
+                                                </a>
+                                             
+
+                                            </td>
+                                            <td class="table-row-menu icons">
+                                                <a href="@Url.Action("Details", "Task", new { id = item.TaskId })">
+                                                    <img src="~/Images/edit.svg" alt="edit">
+                                                </a>
+                                                <a href="@Url.Action("Delete", "Task", new { id = item.TaskId })">
+                                                    <img src="~/Images/delete.svg" alt="delete">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                @* template tasks as a partial view under a tab *@
+                <div class="tab-pane fade  form-tab-details" id="tab_2">
+                    @{
+                        Html.RenderAction("GetTaskTemplatesPartial", "Task");
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>

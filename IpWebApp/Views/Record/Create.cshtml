@@ -1,0 +1,712 @@
+﻿@model IpWebApp.Models.Record
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@*<link rel="stylesheet" href="~/Content/details-page.css" />*@
+@*<link rel="stylesheet" href="~/Content/style.css" />*@
+@*<link rel="stylesheet" href="~/Content/edit-create-pages.css" />*@
+<link rel="stylesheet" href="~/Content/create-page.css">
+
+
+@using (Html.BeginForm("Create", "Record", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <main class="container">
+        <div class="row">
+            <div class="back">
+                <a href="@Url.Action("Index", "Record", "Record")">< Records</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="heading">Create New Record</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-panel-create">
+                <form id="add-record-form">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row-cols-sm-2">
+                            <div class="form-group" style="padding-right: calc(var(--bs-gutter-x)/ 2);">
+                                @Html.RadioButton("DivisionalOf", "", false, new { @class = "radio-buttton-style" })
+                                <label for="parentld" class="control-label col-md-3 form-label-font-size">Divisional Of:</label>
+                                <input type="text" class="form-control" id="ParentName" style="display:none">
+                                <input name="Parentid" type="hidden" class="form-control" id="ParentId">
+
+                                @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                            </div>
+                            <script>
+                                $("#ParentName").change(function ()
+                                {
+                                    let parentNameValue = $('#ParentName').val();
+                                    if (!parentNameValue.trim() && parentNameValue.length < 1) {
+                                        $('#ParentId').val(null);
+                                    }
+                                });
+
+                            </script>
+                            <script type="text/javascript">
+                                var checked = $("#DivisionalOf").prop("checked");
+                                $("#DivisionalOf").click(function ()
+                                {
+                                    $("#ParentName").toggle();
+
+                                    checked = !checked;
+                                    $("#DivisionalOf").prop("checked", checked);
+                                    console.log($("#DivisionalOf").prop("checked"));
+                                    return;
+
+                                });
+                            </script>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @* <label for="title">Title</label>*@
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 form-label-font-size" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group" style="display:none">
+                                @Html.LabelFor(model => model.ApplicationDate)
+                                <input name="ApplicationDate" type="date" class="form-control form-control w-100" id="application-date" placeholder="DD / MM / YYYY" value="@Html.DisplayFor(model => model.ApplicationDate)">
+                                @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger " })
+                            </div>
+
+                            <div class="form-group" style="display:none">
+                                <label for="registration-date">Registration Date</label>
+                                <input name="RegistrationDate" type="date" class="form-control form-control w-100" id="registration-date" placeholder="" value="@Html.DisplayFor(model => model.RegistrationDate)">
+                                @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger " })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RegistrationNumber, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+                                <input name="RegistrationNumber" type="text" class="form-control" id="registrationNumber" value="@Html.DisplayFor(model => model.RegistrationNumber)">
+                                @Html.ValidationMessageFor(model => model.RegistrationNumber, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clientld" class="control-label col-md-3 form-label-font-size">Client</label>
+                                <input type="text" class="form-control" id="ClientName">
+                                <input name="Clientid" type="hidden" class="form-control" id="ClientId">
+
+                                @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
+                            </div>
+                            <script>
+                                $("#ClientName").change(function ()
+                                {
+                                    let clientNameValue = $('#ClientName').val();
+                                    if (!clientNameValue.trim() && clientNameValue.length < 1) {
+                                        $('#ClientId').val(null);
+                                    }
+                                });
+                            </script>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-3 form-label-font-size" })
+                                <input name="Country" type="text" class="form-control" id="Country" placeholder="" value="@Html.DisplayFor(model => model.Country)">
+
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <br />
+                                @Html.CheckBoxFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                                <label for="priority" class="form-label-font-size normal-font-style">Priority </label>
+                                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group" id="priorities">
+                                @{ Html.RenderPartial("_CreatePriority"); }
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="form-group" style="display:none">
+                                <label for="next-action-date">Next Action Date</label>
+                                <input name="NextActionDate" type="date" class="form-control w-100" id="next-action-date" placeholder="DD / MM / YYYY" value="@Html.DisplayFor(model => model.NextActionDate)">
+                            </div>
+                        </div>
+
+                        <div class="col ">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+
+                                <div class="select-wrapper col">
+                                    @Html.EnumDropDownListFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+                                <div class="select-wrapper col">
+                                    @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+                                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                            </div>
+
+                            @*<div>
+                                    <input type="file" id="image" name="image" accept="image/*" />
+                                    <img id="blah" src="#" style="display:none" height=200 width=200 />
+                                </div>*@
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="title" class="form-label-font-size normal-font-style">Choose Files</label>
+                                    <div class="col-12">
+                                        <div class="d-flex flex-row justify-content-center field-border" style="/*padding-left:10%;*/ height:163px;">
+                                            <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+                                            <img id="blah" src="#" style="display:none" height="163px">
+                                            <div style="top:65%; position:absolute; right:36%;">
+                                                <input type="image" src="/Images/add.svg" style="height:32px; width:32px;border-bottom:none !important">
+                                                <label for="title" class="row form-label-font-size normal-font-style">Choose Files</label>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $("input[type='image']").click(function (event)
+                                            {
+                                                event.preventDefault();
+                                                $("input[id='image']").click();
+                                                return false;
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="patent" style="visibility:hidden">
+                                @{ Html.RenderPartial("_CreatePatent"); }
+                            </div>
+                            <div class="form-group" id="trademark" style="visibility:hidden">
+                                @{ Html.RenderPartial("_CreateTrademark"); }
+                            </div>
+                            <div class="form-group" id="design" style="visibility:hidden">
+                                @{ Html.RenderPartial("_CreateDesign"); }
+                            </div>
+                        </div>
+
+                        <div id="applicantHolder" class="row" style="margin-left: 0px;padding-left: 0px;margin-right: 12px;padding-right: 0px;">
+                            <div id="applicantFields" class="col-6" style="padding-left: calc(var(--bs-gutter-x)/ 2);">
+                                <div id="applicant" class="form-group col">
+                                    <label for="ApplicantName" class="control-label col-md-3 form-label-font-size">Applicant Name:</label>
+                                    <input name="ApplicantName" data-previous-name="" type="text" class="form-control" id="ApplicantName" required minlength="3" title="Please Enter Applicant Name" value="">
+
+                                    <label for="Phone" class="control-label col-md-3 form-label-font-size">Phone:</label>
+                                    <input name="Phone" type="text" class="form-control" id="Phone">
+
+                                    <label for="POA" class="control-label col-md-3 form-label-font-size">POA:</label>
+                                    <input name="POA" type="text" class="form-control" id="POA">
+
+                                    <input name="ApplicantId" type="text" class="form-control" id="ApplicantId" hidden>
+                                    <script>
+                                        $("#ApplicantName").change(function ()
+                                        {
+                                            let applicantNameValue = $('#ApplicantName').val();
+                                            let applicantPreviousName = $('#ApplicantName').attr('data-previous-name');
+                                            if (applicantPreviousName !== applicantNameValue) {
+
+                                                console.log("The applicantPreviousName attr was: ", applicantPreviousName);
+                                                $('#ApplicantId').val(null);
+                                            }
+
+                                            if (!applicantNameValue.trim() && applicantNameValue.length < 1) {
+                                                $('#ApplicantId').val(null);
+                                            }
+                                        });
+                                    </script>
+
+                                    <p id="applicantListLabel" class="h6" style="margin-top:15px">Record's Applicants:</p>
+                                    <input id="ApplicantIdList" name="ApplicantIdList" type="text" hidden>
+                                    <div id="applicantsNameList" class="d-flex flex-row m-1">
+                                       @* <span class="badge rounded-pill bg-primary fs-6 fw-normal">Test Badge</span>*@
+                                     @*   <span class="badge rounded-pill bg-primary fs-6 fw-normal">Test Badge2</span>*@
+                                    </div>
+                                    <button id="add-applicant-btn" style="background:none; border:none; height:50px; margin-top:30px;"  type="button">
+                                        <div class="d-flex">
+                                            <input type="image" src="/Images/add.svg" style="height:16px; width:16px;border-bottom:none !important">
+                                            <label for="title" class="row ms-2 form-label-font-size normal-font-style" style="font-size:16px; height:16px;">Add Another Applicant</label>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-6 second-col-wrapper form-group">
+                                <label for="Address" class="control-label col-md-3 form-label-font-size">Address:</label>
+                                <input name="Address" type="text" class="form-control" id="Address">
+
+                                <label for="Formation" class="control-label col-md-3 form-label-font-size">Formation:</label>
+                                <input name="Formation" type="text" class="form-control" id="Formation">
+                            </div>
+                        </div>
+
+                        <div class="form-submit d-flex justify-content-center">
+                            <button class="btn-submit" type="submit" id="applicantSubmit">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+
+    <div class="form-horizontal">
+    </div>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    //applicant sending
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("#add-applicant-btn").click(function (event)
+            {
+                event.preventDefault();
+                // applicant name validation
+                const input = document.getElementById('ApplicantName');
+                const validityState = input.validity;
+                if (validityState.valueMissing) {
+                    input.setCustomValidity('Please Enter Applicant Name');
+                    input.reportValidity();
+                    console.log('Please Enter Applicant Name\nApplicantName validity is: ', validityState);
+                    // alert('Please Enter Applicant Name\nApplicantName validity is: ' + validityState.valid);
+
+                    return
+                } else {
+                    input.setCustomValidity('');
+                }
+                input.reportValidity();
+                console.log('add-applicant-btn validity state is: ', validityState);
+
+                //$('#ApplicantName').validate();
+                //if (!$('ApplicantName').valid()) {
+                //    alert('Please Enter Applicant Name\nApplicantName validity is: ', $('ApplicantName').valid() );
+                //}
+
+                //function postApplicant()
+                // {
+                var applicant = {
+                    ApplicantName: $("#ApplicantName").val(),
+                    Phone: $("#Phone").val(),
+                    Address: $("#Address").val(),
+                    Formation: $("#Formation").val(),
+                    POA: $("#POA").val(),
+                    ApplicantId: $("#ApplicantId").val(),
+
+                }
+                var appJson = JSON.stringify(applicant);
+
+                $.post("/Record/PostApplicantsJson",  // url
+                    { appJson: appJson }) // data to be submit
+                    .done(function (data)
+                    {
+                        alert(`Data Loaded: ${JSON.stringify(data)}`);
+                        // append returned applicant id to ApplicantIdList value
+                        if (data.ApplicantId) {
+                            if (data.ApplicantId !== 0 || data.ApplicantId !== "0") {
+                                let curVal = $("#ApplicantIdList").val();
+                                let intIdList = curVal.split(',').map(Number);
+                                if (intIdList.length <= 1) {
+                                    console.log('=====>   curVal is:', curVal, 'intIdList is:', intIdList);
+                                    for (var i = 0; i < intIdList.length; i++) {
+                                        if (intIdList[i] !== data.ApplicantId) {
+                                            let content = $('<span>' + data.ApplicantName + '</span>').addClass('badge rounded-pill bg-primary mt-1 fs-6 fw-normal').css({ "margin-left": "3px" })
+
+                                            $("#applicantsNameList").append(content);
+                                            $("#ApplicantIdList").val(curVal + data.ApplicantId + ",");
+
+                                        }
+                                    }
+                                }
+                                else if (intIdList.length > 1) {
+                                    intIdList.pop();
+                                    console.log('=====>   curVal is:', curVal, 'intIdList is:', intIdList);
+                                    let distinctIds = [...new Set(intIdList)];
+                                    let strDistinctIds = distinctIds.join();
+                                    if (!distinctIds.includes(data.ApplicantId)) {
+
+                                        let content = $('<span>' + data.ApplicantName + '</span>').addClass('badge rounded-pill bg-primary mt-1 fs-6 fw-normal').css({ "margin-left": "3px" })
+
+                                        $("#applicantsNameList").append(content);
+                                        $("#ApplicantIdList").val(strDistinctIds + "," + data.ApplicantId + ",");
+                                        // $('<span class="badge rounded - pill bg - primary fs - 6 fw - normal">' + data.ApplicantName + '</span>').appendTo("#applicantsNameList");
+                                    }
+                                }//
+                            }
+
+                        }
+
+                    }).fail(function (error)
+                    {
+                        alert("Got Error: ", error);
+                    });
+                // }
+
+            });
+        });
+    </script>
+
+    // applicant name validation
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            let applicantSubEl = document.getElementById("applicantSubmit");
+            applicantSubEl.addEventListener('click', function ()
+            {
+                const input = document.getElementById('ApplicantName');
+                const validityState = input.validity;
+                if (validityState.valueMissing) {
+                    input.setCustomValidity('Please Enter Applicant Name');
+                } else {
+                    input.setCustomValidity('');
+                }
+                input.reportValidity();
+            }, false);
+        });
+    </script>
+
+    <script>
+
+        function readURL(input)
+        {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e)
+                {
+                    $('#blah').attr('src', e.target.result);
+                    $('#blah').attr('style', "normal");
+
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+
+        }
+
+        $("#image").change(function ()
+        {
+            readURL(this);
+        });
+    </script>
+
+    <script>
+        $(document).ready(function ()
+        {
+            $("#ApplicantName").autocomplete({
+                source: function (request, response)
+                {
+                    $.ajax({
+                        url: "/Applicant/GetAppDetailsByPrefix",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data)
+                        {
+                            response($.map(data, function (item)
+                            {
+                                //$('#ApplicantId').val(item.id);
+                                //$('#Phone').val(item.phone);
+                                //$('#Address').val(item.address);
+                                //$('#Formation').val(item.formation);
+                                //$('#POA').val(item.poa);
+                                //return item.name;
+                                return item;
+                            }))
+
+                        }
+                    })
+                },
+                select: function (event, ui)
+                {
+                    event.preventDefault();
+                    $('#ApplicantName').val(ui.item.name);
+                    $('#ApplicantName').attr('data-previous-name', ui.item.name);
+                    $('#ApplicantId').val(ui.item.id);
+                    $('#Phone').val(ui.item.phone);
+                    $('#Address').val(ui.item.address);
+                    $('#Formation').val(ui.item.formation);
+                    $('#POA').val(ui.item.poa);
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            }).autocomplete('instance')._renderItem = function (ul, item)
+                {
+                    return $("<li>")
+                        .append(item.name)
+                        .appendTo(ul);
+                }
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function ()
+        {
+            $(".EnterDate").datepicker({
+                dateFormat: "dd/mm/yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $(function ()
+            {
+                $("#ClientName").autocomplete({
+                    source: function (request, response)
+                    {
+                        $.ajax({
+                            url: '/Record/GetClientByPrefix/',
+                            data: "{ 'prefix': '" + request.term + "'}",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data)
+                            {
+                                response($.map(data, function (item)
+                                {
+                                    return item;
+
+                                }))
+                            },
+                            error: function (response)
+                            {
+                                alert(response.responseText);
+                            },
+                            failure: function (response)
+                            {
+                                alert(response.responseText);
+                            }
+                        });
+                    },
+
+                    minLength: 1,
+                    select: function (event, ui)
+                    {
+                        event.preventDefault();
+                        $('#ClientName').val(ui.item.label);
+                        $('#ClientId').val(ui.item.value);
+
+                    }
+                });
+            });
+        })
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $(function ()
+            {
+                $("#ParentName").autocomplete({
+                    source: function (request, response)
+                    {
+                        $.ajax({
+                            url: '/Record/GetRecordByPrefixJson/',
+                            data: "{ 'prefix': '" + request.term + "'}",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data)
+                            {
+                                response($.map(data, function (item)
+                                {
+                                    return item;
+                                }))
+                            },
+                            error: function (response)
+                            {
+                                alert(response.responseText);
+                            },
+                            failure: function (response)
+                            {
+                                alert(response.responseText);
+                            }
+                        });
+                    },
+
+                    minLength: 1,
+                    focus: function (event, ui)
+                    {
+                        // Regular Json attributes
+                        $('#ParentId').val(ui.item.RecordId);
+                        $('#ParentName').val(ui.item.value);
+                        $('#ClientId').val(ui.item.ClientId);
+                        $('#ClientName').val(ui.item.ClientName);
+                        $('#Notes').val(ui.item.Notes);
+                        $('#registrationNumber').val(ui.item.RegistrationNumber);
+                        $('#Country').val(ui.item.Territory);
+                        $('#Inventor').val(ui.item.Inventor);
+
+                        // Priority deppendant attributes
+                        $('#Priority').prop("checked", ui.item.Priority);
+                        if ($('#Priority').prop("checked") == true) {
+                            $('#priorities').show();
+                            // Priority date           // although the date is writen in 'yy-mm-dd' format, it this is correct, because it yields a 'dd-mm-yyyy' format evetually
+                            if (ui.item.PriorityDate.trim() && ui.item.PriorityDate.length > 1) {
+                                var newFormattedDate = $.datepicker.formatDate('yy-mm-dd', new Date(parseInt(ui.item.PriorityDate.substr(6))));
+                                var currentPriorityDate = $('#priority-date').val();
+                                $('#priority-date').val(newFormattedDate);
+                                console.log('Current priority date is:', currentPriorityDate, 'Formated Json priority date is:', newFormattedDate);
+                            }
+
+                            // Priority country
+                            $('#PriorityCountry').val(ui.item.PriorityCountry);
+                            // Priority number
+                            $('#PriorityNumber').val(ui.item.PriorityNumber);
+                        }
+                        else if ($('#Priority').prop("checked") == false) {
+                            $('#priorities').hide();
+                            $('#priority-date').val('');
+                            $('#PriorityCountry').val('');
+                            $('#PriorityNumber').val('');
+                        }
+
+                        // Image handling attributes
+                        if (ui.item.Image.length > 0) {
+                            $('#blah').attr('src', "/Record/RetrieveImage/" + ui.item.RecordId);
+                            $('#blah').attr('style', "normal");
+                        }
+                        else {
+                            $('#blah').attr('style', "display:none");
+                        }
+                        console.log('autocomplete property is: ', ui.item);
+                    }
+                });
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $("#Country").autocomplete({
+                source: function (request, response)
+                {
+                    $.ajax({
+                        url: "/Record/GetCountriesByPrefix",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data)
+                        {
+                            response($.map(data, function (item)
+                            {
+                                return { label: item.CountryName, value: item.CountryName };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+            $("#PriorityCountry").autocomplete({
+                source: function (request, response)
+                {
+                    $.ajax({
+                        url: "/Record/GetCountriesByPrefix",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data)
+                        {
+                            response($.map(data, function (item)
+                            {
+                                return { label: item.CountryName, value: item.CountryName };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+    </script>
+
+    <script>
+        window.onload = function ()
+        {
+            document.getElementById("patent").style.visibility = "visible";
+            document.getElementById("trademark").style.visibility = "hidden";
+            document.getElementById("design").style.visibility = "hidden";
+            document.getElementById("priorities").style.display = "none";// this MUST be - .style.display = "none";
+            // AND NOT - .style.visibility = "hidden";
+            // because if not, the jQuery function .toggle(); won't work
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        // toggle visiobility of Priority fields
+        $(document).ready(function ()
+        {
+            $('#Priority').change(function ()
+            {
+                $('#priorities').toggle();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $('#Type').change(function ()
+            {
+                var value = $(this).val(); // get selected value
+                if (value == "0") { // this condition may adjusted to certain preset value
+                    document.getElementById("patent").style.visibility = "visible";
+                    document.getElementById("trademark").style.visibility = "hidden";
+                    document.getElementById("design").style.visibility = "hidden";
+                    document.getElementById("patent").style.display = "inherit";
+                    document.getElementById("trademark").style.display = "none";
+                    document.getElementById("design").style.display = "none";
+
+                }
+                else if (value == "1") {
+                    document.getElementById("patent").style.visibility = "hidden";
+                    document.getElementById("trademark").style.visibility = "visible";
+                    document.getElementById("design").style.visibility = "visible";
+                    document.getElementById("patent").style.display = "none";
+                    document.getElementById("trademark").style.display = "inherit";
+                    document.getElementById("design").style.display = "inherit";
+                    $("#ExpirationDateHolder").hide();
+                }
+                else {
+                    document.getElementById("patent").style.visibility = "visible";
+                    document.getElementById("trademark").style.visibility = "hidden";
+                    document.getElementById("design").style.visibility = "visible";
+                    document.getElementById("patent").style.display = "inherit";
+                    document.getElementById("trademark").style.display = "none";
+                    document.getElementById("design").style.display = "inherit";
+                    $("#ExpirationDateHolder").show();
+
+                }
+            });
+
+        });
+    </script>
+}

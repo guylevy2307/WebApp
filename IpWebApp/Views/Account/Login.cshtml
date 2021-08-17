@@ -1,0 +1,76 @@
+﻿@using IpWebApp.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+    <style>
+        .top-border {
+            border-top: 8px solid !important;
+            border-top-color: #feefe8 !important;
+        }
+    </style>
+<div class="d-flex align-items-center justify-content-center">
+    <div class="mt-4" style="width:35%">
+        <h2 class="text-center font-family-rubik normal-font-style login form-text-color page-heading-font-size">@ViewBag.Title</h2>
+
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+
+                @Html.AntiForgeryToken()
+                <h4 class="text-center font-family-rubik normal-font-style local-account-text form-text-color">Use a local account to log in</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="border p-4 bg-white shadow top-border mt-2">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label form-label-font-size mb-2 normal-font-style" })
+                        <div class="d-flex justify-content-center">
+                            @Html.TextBoxFor(m => m.Email, new {  @class = "form-control text-secondary normal-font-style " })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "control-label form-label-font-size mb-2 normal-font-style" })
+                        <div class="d-flex justify-content-center">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control text-secondary normal-font-style " })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <div class="checkbox">
+                            @Html.LabelFor(m => m.RememberMe, "Remember me", new { @class = "text-secondary remember-me-label normal-font-style" })
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                          
+                            </div>
+                    </div>
+                    <div class="form-group mt-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <input type="submit" class="btn btn-register py-2 px-4 normal-font-style form-text-color" value="Log in" style="background-color:#1d1fff" />
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="d-flex align-items-center justify-content-center ">
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword", null, new { @class = "text-decoration-none forget-password-link form-text-color normal-font-style local-account-text" })
+                        </div>
+                    </div>
+                    <div class="form-group mt-5">
+                        <div class="d-flex align-items-center justify-content-center text-decoration-none">
+                            @Html.ActionLink("Register as a new user", "Register", null, new { @class = "text-decoration-none register-new-user-link normal-font-style local-account-text", @style = "color:#1d1fff " })
+                        </div>
+
+                    </div>
+
+                </div>
+            } 
+           
+        </section>
+        <div >
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel() { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

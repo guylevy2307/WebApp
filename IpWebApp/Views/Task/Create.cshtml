@@ -1,0 +1,373 @@
+﻿@using Microsoft.AspNet.Identity
+@model IpWebApp.Models.Task
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<link rel="stylesheet" href="~/Content/create-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+<link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+      rel="Stylesheet" type="text/css" />
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <main class="container">
+
+        <div class="row">
+            <div class="back">
+                <a href="@Url.Action("Index", "Task", "Task")">< Tasks</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="heading">Create New Task</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="form-panel-create">
+                <form id="add-task-form">
+                    <div class="row">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-6">
+
+                            <div class="form-group">
+                                <label for="title">Record</label>
+                                <input type="text" class="form-control" id="RecordName">
+                                <input name="RecordId" type="hidden" class="form-control" id="RecordId" value="">
+                                @Html.ValidationMessageFor(model => model.Record, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Title)
+                            <input type="text" class="form-control" id="taskSelect" name="Title" autocomplete="off">
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+
+
+                        <!--
+            <div class="form-group d-flex align-items-center">
+                <div class="subtask-checkbox d-flex align-items-center">
+                    <input name="create-subtask" type="checkbox" id="create-subtask">
+                    <label class="for-checkbox" for="create-subtask">Create Subtask</label>
+                </div>
+                <div class="select-wrapper col">
+                    <select name="subtask" id="subtask" class="form-control">
+                    </select>
+                </div>
+
+            </div>
+    -->
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description)
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "description", @id = "description", @name = "description" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Deadline)
+                                <input name="nextAction" type="date" id="nextAction" placeholder="DD / MM / YYYY" hidden>
+                                <input name="RenewalDate" type="date" id="RenewalDate" placeholder="DD / MM / YYYY" hidden>
+                                <input name="RegistrationDate" type="date" id="RegistrationDate" placeholder="DD / MM / YYYY" hidden>
+
+                                <input name="deadline" type="date" class="form-control w-100" id="deadline" placeholder="DD / MM / YYYY">
+                                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+
+                            </div>
+                         
+                            <div class="form-group">
+                                <!-- @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+
+                                <div class="select-wrapper col">
+                                    @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                -->
+                                <label>Client Name:</label>
+                                <input type="text" id="clientName" class="form-control w-100"  disabled >  
+                                </div>
+                        </div>
+
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Pricing)
+                                <input name="Pricing" type="number" class="form-control w-100" id="Pricing">
+                                @Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Assignee:</label>        
+                                <div class="select-wrapper col">
+                                    @Html.DropDownListFor(model => model.Assignee, ViewBag.Users as SelectList, new { @class = "form-control" })
+                                </div>
+                                </div>
+                        </div>
+
+
+                        <div class="form-submit d-flex justify-content-center">
+                            <button class="btn-submit" type="submit">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".EnterDate").datepicker({
+                dateFormat: "dd/mm/yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function ()
+        {
+            $("#RecordName").autocomplete({
+                source: function (request, response)
+                {
+                    $.ajax({
+                        url: "/Record/GetRecordByPrefix",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data)
+                        {
+                            response($.map(data, function (item)
+                            {
+                                return item;
+
+                            }))
+
+                        }
+                    })
+                },
+                select: function (event, ui)
+                {
+                   
+                    if (ui.item.nextAction == null || ui.item.RenewalDate == null || ui.item.RegistrationDate==null)
+                    {
+                        alert("some dates are null");
+                       
+                        }
+                    else{
+                        var value1, value2, value3;
+                        if (ui.item.nextAction != null) {
+
+                            value1 = new Date(parseInt(ui.item.nextAction.toString().substr(6)));
+                            var mo;
+                            if (value1.getMonth() + 1 <= 9) {
+                                mo = "0" + (value1.getMonth() + 1);
+                            }
+                            else {
+                                mo = value1.getMonth() + 1;
+                            }
+                        }
+                        if (ui.item.RenewalDate != null) {
+                            value2 = new Date(parseInt(ui.item.RenewalDate.toString().substr(6)));
+                            var mo2;
+                            if (value2.getMonth() + 1 <= 9) {
+                                mo2 = "0" + (value2.getMonth() + 1);
+                            }
+                            else {
+                                mo2 = value2.getMonth() + 1;
+                            }
+                        }
+                        if (ui.item.RegistrationDate != null) {
+                            value3 = new Date(parseInt(ui.item.RegistrationDate.toString().substr(6)));
+                            var mo3;
+                            if (value3.getMonth() + 1 <= 9) {
+                                mo3 = "0" + (value3.getMonth() + 1);
+                            }
+                            else {
+                                mo3 = value3.getMonth() + 1;
+                            }
+                        }
+
+                        if (value1 != null && value2 != null && value3 != null) {
+
+                            var finalResult = value1.getFullYear() + "-" + (mo) + "-" + + value1.getDate();
+                            var finalResult2 = value2.getFullYear() + "-" + (mo2) + "-" + + value2.getDate();
+                            var finalResult3 = value3.getFullYear() + "-" + (mo3) + "-" + + value3.getDate();
+
+                            event.preventDefault();
+                            $('#nextAction').val(finalResult);
+                            $('#RenewalDate').val(finalResult2);
+                            $('#RegistrationDate').val(finalResult3);
+                            $('#clientName').val(ui.item.ClientName);
+                            $('#RecordName').val(ui.item.label);
+                            $('#RecordId').val(ui.item.value);
+                          
+                         }
+
+                        }
+                }
+               
+            }).autocomplete('instance')._renderItem = function (ul, item)
+            {
+                return $("<li>")
+                    .append(item.label)
+                    .appendTo(ul);
+            }
+        });
+    </script>
+                     <!--       
+    <script type="text/javascript">
+        $(function () {
+                $("#RecordName").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: '/Record/GetRecordByPrefix/',
+                            data: "{ 'prefix': '" + request.term + "'}",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    $('#RecordId').val(item.value);
+                                    if (item.nextAction != null || item.RenewalDate != null || item.RegistrationDate)
+                                       alert("some dates are null");
+                                        
+                                      
+                                    var value1, value2, value3;
+                                    if (item.nextAction != null )  
+                              {
+                                  
+                                     value1 = new Date(parseInt(item.nextAction.toString().substr(6)));
+                                    var mo;
+                                    if (value1.getMonth() + 1 <= 9) {
+                                         mo = "0" + (value1.getMonth() + 1);
+                                    }
+                                    else {
+                                        mo =  value1.getMonth() + 1;
+                                    }
+                                    } 
+                                    if (item.RenewalDate != null)
+                                    {
+                                     value2 = new Date(parseInt(item.RenewalDate.toString().substr(6)));
+                                    var mo2;
+                                    if (value2.getMonth() + 1 <= 9) {
+                                        mo2 = "0" + (value2.getMonth() + 1);
+                                    }
+                                    else {
+                                        mo2 = value2.getMonth() + 1;
+                                    }
+                                    }
+                                    if (item.RegistrationDate != null)
+                                    {
+                                     value3 = new Date(parseInt(item.RegistrationDate.toString().substr(6)));
+                                    var mo3;
+                                    if (value3.getMonth() + 1 <= 9) {
+                                        mo3 = "0" + (value3.getMonth() + 1);
+                                    }
+                                    else {
+                                        mo3 = value3.getMonth() + 1;
+                                        }
+                                    }
+
+                                    if (value1 != null && value2 != null && value3 != null)
+                                    {
+
+                                    var finalResult = value1.getFullYear() + "-" + (mo) + "-" + + value1.getDate();
+                                    var finalResult2 = value2.getFullYear() + "-" + (mo2) + "-" + + value2.getDate();
+                                    var finalResult3 = value3.getFullYear() + "-" + (mo3) + "-" + + value3.getDate();
+
+                                    $('#nextAction').val(finalResult);
+                                    $('#RenewalDate').val(finalResult2);
+                                    $('#RegistrationDate').val(finalResult3);
+                                  
+                                    $('#clientName').val(item.ClientName);
+                                    }
+                                  
+
+                                    return item.label; 
+                                }))
+                            }
+                        });
+                    }
+                });
+            });
+       
+    </script>
+    -->   
+    <script type="text/javascript">
+        $(function findTask() {
+            $("#taskSelect").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Task/AutoCompleteTamplateTask/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                $('#description').val(item.mission);
+                             
+                               // alert("add " + item.day+" days");     
+                                if (item.dateType == "nextAction") {
+                                    var t = document.getElementById("nextAction").value;
+
+                                }
+                                else if (item.dateType == "RenewalDate") {
+                                    var t = document.getElementById("RenewalDate").value;
+                                }
+                                else {
+                                    var t = document.getElementById("RegistrationDate").value;
+                                }
+                                var d =  new Date(t);
+                                d.setDate(d.getDate() + item.days);
+                                d.setMonth(d.getMonth()+ item.months);
+                                d.setFullYear(d.getFullYear() + item.years);
+                                var mo = d.getMonth()+1;
+                                if (d.getMonth()  <= 9) {
+                                    mo = "0" + mo;
+                                }
+
+                                var da = d.getDate();
+                                if (d.getDate() <= 9) {
+                                    da = "0" + da;
+                                }
+                               
+                                var someFormattedDate = d.getFullYear() + '-' +mo + '-' + da;
+                                $('#deadline').val(someFormattedDate);
+                                $('#Pricing').val(item.price);
+                                return item.title;
+                                
+                            }))
+                        }
+                    });
+                }
+            }).focus(function () {
+                $(this).autocomplete("search");
+            });
+        });
+    </script>
+
+}
+

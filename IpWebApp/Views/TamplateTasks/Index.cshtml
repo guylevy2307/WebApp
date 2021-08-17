@@ -1,0 +1,70 @@
+﻿@model IEnumerable<IpWebApp.Models.TamplateTask>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Create New", "Create", "TamplateTasks", htmlAttributes: null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddMonths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddYears)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pricing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddMonths)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddYears)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pricing)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TamplateTaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TamplateTaskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TamplateTaskId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,224 @@
+﻿@model IpWebApp.Models.Record
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<link rel="stylesheet" href="~/Content/create-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Record</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.RecordId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RegistrationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RegistrationDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RenewalDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RenewalDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RenewalDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RegistrationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RegistrationNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RegistrationNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClientId, "ClientId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownList("ClientId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <br />
+        <label id="PriorityID" data-show="@Model.Priority" for="priority">Priority </label>
+        @Html.CheckBoxFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group" id="priorities">
+        @{ Html.RenderPartial("_CreatePriority"); }
+    </div>
+
+
+    <div class="subtasks">
+        <div class="heading col-12 d-flex align-items-center justify-content-between">
+            <h2>Divisionals</h2>
+            @*    @Html.ActionLink("Add New Divisionals", "CreateById", "Subtask", new { Id = Model.RecordId }, htmlAttributes: null)*@
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Record Type</th>
+                    <th scope="col">Territory</th>
+                    <th scope="col">Registration Num.</th>
+                    <th scope="col">Application Date</th>
+                    <th scope="col">Renewal Date</th>
+                    <th scope="col">Next Action Date</th>
+                    <th scope="col">Notes</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Divisionals)
+                {
+                    <tr>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Type)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Country)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.RegistrationNumber)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.ApplicationDate)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.RenewalDate)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.NextActionDate)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Notes)</td>
+                        <td>
+                            <a href="">
+                                <img src="./assets/right-arrow.svg" alt="">
+                            </a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*  scripts *@
+
+
+<script type="text/javascript">
+    window.onload = function ()
+    {
+        let priorityValue = $('#PriorityID').attr('data-show');
+        console.log("The priorityValue is: ", priorityValue);
+        if (priorityValue === 'True') {
+
+            document.getElementById("priorities").style.display = "inherit";
+
+        }
+        else {
+            document.getElementById("priorities").style.display = "none";// this MUST be - .style.display = "none";
+            // AND NOT - .style.visibility = "hidden";
+            // because if not, the jQuery function .toggle(); won't work
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    // toggle visiobility of Priority fields
+    $(document).ready(function ()
+    {
+        $('#Priority').change(function ()
+        {
+            $('#priorities').toggle();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        //$("#Country").autocomplete({
+        //    source: function (request, response)
+        //    {
+        //        $.ajax({
+        //            url: "/Record/GetCountriesByPrefix",
+        //            type: "POST",
+        //            dataType: "json",
+        //            data: { Prefix: request.term },
+        //            success: function (data)
+        //            {
+        //                response($.map(data, function (item)
+        //                {
+        //                    return { label: item.CountryName, value: item.CountryName };
+        //                }))
+
+        //            }
+        //        })
+        //    },
+        //    messages: {
+        //        noResults: "", results: ""
+        //    }
+        //});
+
+        $("#PriorityCountry").autocomplete({
+            source: function (request, response)
+            {
+                $.ajax({
+                    url: "/Record/GetCountriesByPrefix",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data)
+                    {
+                        response($.map(data, function (item)
+                        {
+                            return { label: item.CountryName, value: item.CountryName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>

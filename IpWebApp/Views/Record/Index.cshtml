@@ -1,0 +1,98 @@
+﻿@model IEnumerable<IpWebApp.Models.Record>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+
+<main class="container">
+    <div class="row mb-3">
+        <h2 class="page-heading-font-size records normal-font-style" style="padding-left:0px">Records</h2>
+        <div style="padding-left:0px">
+            @using (Html.BeginForm("Index", "Record"))
+            {
+                <div class="filter d-flex mt-2">
+                    <label for="key" class="search-record-field pt-2 normal-font-style" style="width:11%">Search record by:</label>
+                    <select name="key" id="key" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:8%;">
+                        <option value="name">Name</option>
+                        <option value="number">Number</option>
+                    </select>
+
+
+                    <input type="text" id="searchStr" name="searchStr" placeholder="Search a Record" style="width:52%" class="p-2 normal-font-style body-bg-color field-border field-margin-left" />
+                    <input type="submit" name="onString" value="Search" class="p-1 btn-submit normal-font-style"/>
+                </div>
+
+                <div class="filter d-flex mt-5">
+                    <label class="search-record-field pt-2 normal-font-style" style="width:11%">Search by date:</label>
+                    <select name="dateKey" id="dateKey" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:15%;">
+                        <option value="Application">Application Date</option>
+                        <option value="Registration">Registration Date</option>
+                        <option value="Renewal">Renewal Date</option>
+                        <option value="NextAction">Next Action Date </option>
+                        <option value="Expiration">Expiration Date </option>
+                    </select>
+                    <span class="pt-2 pb-2 pl-2 pr-0 normal-font-style field-margin-left" style="width:7%;"> Start date:</span> <input type="date" name="start" id="start" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:15%;" />
+                    <span class="pt-2 pb-2 pl-2 pr-0 normal-font-style field-margin-left" style="width:6.5%;"> End date:</span> <input type="date" name="end" id="end" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:15%;" />
+                    <input type="submit" name="onDate" value="Get Records" class="p-1 btn-submit normal-font-style" />
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="row" style="margin-right: 20px;">
+        <div class="records table-list panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Title</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Client Name</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Record Type</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Registration Num.</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Next Action Date</th>
+                        <th scope="col" class="record-table-heading form-text-color pb-2 pt-4 normal-font-style">Image</th>
+                        <th scope="col" class="empty"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td class="col pt-3">@Html.ActionLink(item.Name, "Details", new { id = item.RecordId })</td>
+                        @*<td class="col pt-3">@Html.ActionLink(item.Name, "Details", new { id = item.RecordId }, new { @class = " form-text-color normal-font-style table-data-font-size" })</td>*@
+                        <td class="col pt-3">@Html.ActionLink(item.Client.Name, "Details", "Client", new { id = item.Client.ClientId }, new { @class = " form-text-color normal-font-style table-data-font-size" })</td>
+                        <td class="col form-text-color normal-font-style table-data-font-size pt-3">@Html.DisplayFor(modelItem => item.Type)</td>
+                        <td class="col form-text-color normal-font-style table-data-font-size pt-3">@Html.DisplayFor(modelItem => item.RegistrationNumber)</td>
+                        <td class="col form-text-color normal-font-style table-data-font-size pt-3">
+                            @Convert.ToDateTime(item.NextActionDate).ToString("dd/MM/yyyy")
+                        </td>
+                        <td class=" pt-3">
+                            @if (item.Image == null || item.Image.Length == 0)
+                            {
+                                <img type="hidden" />
+                            }
+                            else
+                            {
+                                <img src="/Record/RetrieveImage/@item.RecordId" alt="" height=100 width=200 />
+                            }
+                        </td>
+                       
+                        <td class="table-row-menu icons">
+                            <a href="@Url.Action("Details", "Record", new { id = item.RecordId })">
+                                <img src="~/Images/edit.svg" alt="edit">
+                            </a>
+                            <a href="@Url.Action("Delete", "Record", new { id = item.RecordId })">
+                                <img src="~/Images/delete.svg" alt="delete">
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+

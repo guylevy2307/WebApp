@@ -1,0 +1,81 @@
+﻿@model IEnumerable<IpWebApp.Models.Applicant>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="~/Content/style.css">
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+<main class="container">
+<div class="row ps-0">
+    <h2 class="page-heading-font-size records normal-font-style" style="padding-left:0px">Applicants</h2>
+    @using (Html.BeginForm("Index", "Applicant", FormMethod.Post, htmlAttributes: new { @class = "ps-0" }))
+    {
+        <div class="filter d-flex">
+            @Html.TextBox("searchStr", null, new { placeholder = "Search By Applicant Name", @class = "search-by" })
+            <span class="filter-icon">
+                <input type="image" src="~/Images/filter.svg" />
+            </span>
+        </div>
+    }
+    <div class="panel">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.ApplicantName)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Formation)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.POA)
+                    </th>
+                    <th scope="col" class="empty"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="col">
+                        @Html.ActionLink(item.ApplicantName, "Details", new { id = item.ApplicantId })
+                    </td>
+                    <td class="col">
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td class="col">
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td class="col">
+                        @Html.DisplayFor(modelItem => item.Formation)
+                    </td>
+                    <td class="col">
+                        @Html.DisplayFor(modelItem => item.POA)
+                    </td>
+                    <td class="col"/>
+                    <td class="table-row-menu icons">
+                        <a href="@Url.Action("Details", "Applicant", new { id = item.ApplicantId })">
+                            <img src="~/Images/edit.svg" alt="edit">
+                        </a>
+                        <a href="@Url.Action("Delete", "Applicant", new { id = item.ApplicantId })">
+                            <img src="~/Images/delete.svg" alt="delete">
+                        </a>
+                    </td>
+
+                </tr>
+            }
+            </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</main>

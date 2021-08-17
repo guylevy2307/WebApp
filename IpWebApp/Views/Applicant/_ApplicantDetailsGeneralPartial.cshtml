@@ -1,0 +1,44 @@
+﻿@model IpWebApp.Models.Applicant
+
+
+  
+@using (Html.BeginForm("Edit", "Applicant", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.ApplicantId)
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+       
+                @Html.LabelFor(model => model.ApplicantName, htmlAttributes: new {@class = " form-label-font-size normal-font-style"})
+                @Html.EditorFor(model => model.ApplicantName, new {htmlAttributes = new {@class = "form-control form-field-font-size mt-2 pb-2 px-0", id = "ApplicantName", name = "ApplicantName" } })
+            </div >
+
+            <div class="form-group" >
+                @Html.LabelFor(model => model.Phone, htmlAttributes: new {@class = " form-label-font-size normal-font-style"})
+                @Html.EditorFor(model => model.Phone, new {htmlAttributes = new {@class = "form-control form-field-font-size mt-2 pb-2 px-0", id = "Phone", name = "Phone" } })
+            </div>
+            <div class="form-group" >
+                @Html.LabelFor(model => model.Address, htmlAttributes: new {@class = "form-label-font-size normal-font-style"})
+                @Html.EditorFor(model => model.Address, new {htmlAttributes = new {@class = "form-control form-field-font-size mt-2 pb-2 px-0", id = "Address", name = "Address" } })
+            </div >
+        
+        </div >
+        <div class="col-4 second-col-wrapper px-0" >
+            <div class="form-group" >
+                @Html.LabelFor(model => model.Formation, htmlAttributes: new {@class = " form-label-font-size normal-font-style"})
+                @Html.EditorFor(model => model.Formation, new {htmlAttributes = new {@class = "form-control form-field-font-size mt-2 pb-2 px-0", id = "Formation", name = "Formation" } })
+            </div >
+            <div class="form-group" >
+                @Html.LabelFor(model => model.POA, htmlAttributes: new {@class = " form-label-font-size normal-font-style"})
+                @Html.EditorFor(model => model.POA, new {htmlAttributes = new {@class = "form-control form-field-font-size mt-2 pb-2 px-0", id = "POA", name = "POA" } })
+            </div >
+
+        </div >
+        
+        <div class="row justify-content-center">
+            <div class="form-submit flex-column">
+                <input type="submit" value="Save" class="btn-submit p-0" style="float:right; width:120px; height:43px" />
+            </div>
+        </div>
+    </div>
+}

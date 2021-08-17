@@ -1,0 +1,9 @@
+﻿@model IpWebApp.Models.Record
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Inventor, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+    <div class="col-md-12">
+        @Html.EditorFor(model => model.Inventor, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Inventor, "", new { @class = "text-danger" })
+    </div>
+</div>

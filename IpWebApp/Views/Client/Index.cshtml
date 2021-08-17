@@ -1,0 +1,89 @@
+﻿@model IEnumerable<IpWebApp.Models.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="~/Content/listing-page.css">
+
+<main class="container">
+    <div class="row">
+        <h2 class="ps-0">Clients</h2>
+        @using (Html.BeginForm("Index", "Client", FormMethod.Post,htmlAttributes: new { @class = "ps-0" }))
+        {
+            <div class="filter d-flex">
+                @Html.TextBox("searchStr", null, new { placeholder = "Search By Client Name", @class = "search-by" })
+                <span class="filter-icon">
+                    <input type="image" src="~/Images/filter.svg" />
+                </span>
+            </div>
+            <div class="filter d-flex mt-5">
+                <label class="search-record-field pt-2 normal-font-style" style="width:11%">Search by balance:</label>
+                <select name="balanceKey" id="balanceKey" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:15%;">
+                    <option value="more then">more then </option>
+                    <option value="less then">less then</option>
+                    <option value="exactly">exactly</option>
+                </select>
+                <span class="pt-2 pb-2 pl-2 pr-0 normal-font-style field-margin-left" style="width:6.5%;"> Balance:</span> <input type="number" name="balance" id="balance" class="p-2 form-text-color normal-font-style body-bg-color field-border" style="width:15%;" />
+                <input type="submit" name="onBalance" value="Get Client" class="p-1 btn-submit normal-font-style" />
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="records table-list panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Client Name</th>
+                        @*<th scope="col">Contact Name</th>*@
+                        <th scope="col">Contact email</th>
+                        @*<th scope="col">Contact position</th>*@
+                        <th scope="col">Referent</th>
+                        <th scope="col">Balance</th>
+                        @*<th scope="col">Notes</th>*@
+                        <th scope="col">Records</th>
+                        <th scope="col" class="empty"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                    <tr>
+                        <td class="col">@Html.ActionLink(item.Name, "Details", new { id = item.ClientId })</td>
+                        @*<td class="col">@Html.DisplayFor(modelItem => item.ContactName)</td>*@
+                    <td class="col">
+                        <a href="mailto:@Html.DisplayFor(modelItem => item.ContactEmail)">@Html.DisplayFor(modelItem => item.ContactEmail)</a>
+                        @*@Html.DisplayFor(modelItem => item.ContactEmail)*@
+                    </td>
+                        @*<td class="col">@Html.DisplayFor(modelItem => item.ContactPosition)</td>*@
+                        <td class="col">@Html.DisplayFor(model => item.Referent)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Balance)</td>
+                        @*<td class="col">@Html.DisplayFor(modelItem => item.Notes)</td>*@
+                        <td class="col">
+                            Total:
+                            <a href="@Url.Action("RecordsByClientId", "Client", new { id = item.ClientId })">
+                                        @item.Records.Count
+                                    </a>
+                          
+
+                        </td>
+                        <td class="table-row-menu icons">
+                            <a href="@Url.Action("Details", "Client", new { id = item.ClientId })">
+                                <img src="~/Images/edit.svg" alt="edit">
+                            </a>
+                            <a href="@Url.Action("Delete", "Client", new { id = item.ClientId })">
+                                <img src="~/Images/delete.svg" alt="delete">
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+
+
+

@@ -1,0 +1,20 @@
+﻿@model IpWebApp.Models.Record
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.RenewalDate, htmlAttributes: new { @class = "control-label col-md-4 form-label-font-size" })
+    <div class="col-md-12">
+        <input name="RenewalDate" type="date" class="form-control w-100" id="RenewalDate" placeholder="dd/MM/yyyy"  >
+        @Html.ValidationMessageFor(model => model.RenewalDate, "", new {@class = "text-danger RenewalDate"})
+    </div>
+</div>
+
+@*<div class="form-group">
+    @Html.LabelFor(model => model.Classes, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Classes, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Classes, "", new { @class = "text-danger" })
+    </div>
+</div>*@
+
+

@@ -1,0 +1,57 @@
+﻿@using IpWebApp.Models
+@model IpWebApp.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<div class="d-flex align-items-center justify-content-center">
+    <style>
+        .top-border {
+            border-top: 8px solid !important;
+            border-top-color: #feefe8 !important;
+        }
+    </style>
+    <div class="mt-4" style="width:35%">
+        <h2 class="text-center font-family-rubik normal-font-style register form-text-color page-heading-font-size">@ViewBag.Title</h2>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+
+            @Html.AntiForgeryToken()
+            <h4 class="text-center font-family-rubik normal-font-style new-account-text form-text-color">Create a new account</h4>
+            @Html.ValidationSummary("", new { @class = "text-danger " })
+            <div class="border p-4 bg-white shadow top-border mt-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label form-label-font-size mb-2 normal-font-style " })
+                    <div class="d-flex justify-content-center">
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Client Name", @class = "form-control p-2 text-secondary normal-font-style " })
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label form-label-font-size mb-2 normal-font-style " })
+                    <div class="d-flex justify-content-center">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control p-2 text-secondary normal-font-style " })
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label form-label-font-size mb-2 normal-font-style " })
+                    <div class="">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control p-2 text-secondary normal-font-style " })
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <input type="submit" class="btn btn-register py-2 px-4 normal-font-style " value="Register" style="background-color:#1d1fff" />
+                    </div>
+                </div>
+             
+            </div>
+
+
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

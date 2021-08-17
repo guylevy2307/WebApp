@@ -1,0 +1,61 @@
+﻿
+input, textarea, select {
+	border: none !important;
+	border-bottom: 1px solid #979797 !important;
+	border-radius: 0 !important;
+	color: #000 !important;
+}
+
+.form-panel-settings {
+	margin-top: 4px;
+	padding: 30px 35px 80px;
+	box-shadow: 0 3px 9px 0 rgb(0 0 0 / 22%);
+	background-color: #ffffff;
+	max-width: 1280px;
+}
+
+.btn-submit {
+	border-radius: 6px !important;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+	background-color: #1d1fff;
+	color: #fff;
+	padding: 12px 35px;
+	border: none;
+}
+
+.form-group label:not(.for-checkbox) {
+	margin-bottom: 5px;
+}
+
+input.form-control:focus {
+	box-shadow: none;
+}
+
+input[type="text"]:disabled {
+	background-color: white !important;
+}
+
+.form-submit {
+	margin-top: 30px;
+}
+
+.btn-submit {
+	color: white !important;
+}
+
+.heading {
+	font-size: 26px;
+	font-weight: 500 !important;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.col-wrapper {
+	margin-left: 60px !important;
+}
+
+.col-width {
+	width: 30%;
+}

@@ -1,0 +1,55 @@
+.tasks {
+    margin-top: 30px;
+    padding: 15px 15px 25px;
+    max-height: 484px;
+}
+
+.tasks .heading {
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.tasks-upcoming {
+    margin-top: 10px;
+}
+
+.tasks-overdue {
+    color: red;
+    font-weight: 500;
+
+}
+
+.recent {
+    margin-top: 50px;
+    flex-wrap: nowrap;
+}
+
+.recent :first-child {
+    margin-right: 15px;
+}
+
+.recent .panel {
+    max-height: 291px;
+}
+
+.recent .heading {
+    margin-top: 25px;
+    padding: 8px;
+}
+
+
+tr:hover .table-row-menu {
+    right: 65px;
+}
+
+@media only screen and (max-width: 1399px) {
+    tr:hover .table-row-menu {
+        right: 45px;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    tr:hover .table-row-menu {
+        right: 25px;
+    }
+}

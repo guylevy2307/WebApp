@@ -1,0 +1,124 @@
+﻿@model IpWebApp.Models.Subtask
+
+@{
+    ViewBag.Title = "Create";
+
+}
+<!-- -->
+<link rel="stylesheet" href="~/Content/create-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+
+
+
+    
+       @Html.AntiForgeryToken()
+
+    <main class="container">
+
+        <div class="row">
+            <div class="back">
+                <a href="@Url.Action("Index", "Task", "Task")">< Tasks</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="heading">Create New Task</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="form-panel-create">
+                <form id="add-task-form">
+                    <div class="row">
+                        <div class="col-12">
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control",name="Title",id= "Title" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex align-items-center">
+                                <div class="subtask-checkbox d-flex align-items-center">
+                                    <input name="create-subtask" type="checkbox" id="create-subtask">
+                                    <label class="for-checkbox" for="create-subtask">Create Subtask</label>
+                                </div>
+                                <div class="select-wrapper col">
+                                  @Html.DropDownList("MainTaskId", (IEnumerable<SelectListItem>)ViewBag.TaskId,  new { @class = "form-control", name = "MainTaskId", id = "MainTaskId" })
+    
+                                    <select name="subtask" id="subtask" class="form-control">
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description)
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "description", @id = "description", @name = "description" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Deadline)
+
+                                <input name="deadline" type="date" class="form-control w-100" id="deadline" placeholder="DD / MM / YYYY" value="@Html.DisplayFor(model => model.Deadline)">
+
+                                <!--
+                                @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control w-100", autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                                    -->
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+                                <div class="select-wrapper col">
+
+                                    @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                                </div>
+
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Pricing)
+                                <input name="pricing" type="text" class="form-control w-100" id="deadline"  value="@Html.DisplayFor(model => model.Pricing)">
+                                @Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-submit d-flex justify-content-center">
+                            <button class="btn-submit" type="submit">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".EnterDate").datepicker({
+                dateFormat: "dd/mm/yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>

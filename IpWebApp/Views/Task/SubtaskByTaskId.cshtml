@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IpWebApp.Models.Subtask>
+
+@{
+    ViewBag.Title = "SubtaskByTaskId";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/listing-page.css">
+ 
+
+
+<main class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <h1> @Html.DisplayFor(modelItem => item.MainTask.Title) SubTask' list</h1>
+            break;
+        }
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    
+    <div class="row">
+        <div class="tasks table-list panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Pricing</th>
+                        <th scope="col">Main Task</th>
+                        <th scope="col" class="empty"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        double sum = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td class="col">@Html.ActionLink(item.Title, "Details", new { id = item.SubtaskId })</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td class="col">   @Convert.ToDateTime(item.Deadline).ToString("dd/MM/yyyy")</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Pricing)</td>
+                        <td class="col">@Html.ActionLink(item.Title, "Details", new { id = item.SubtaskId })</td>
+
+                        <td class="table-row-menu icons">
+                            <a href="@Url.Action("Edit", "Subtask", new { id = item.SubtaskId })">
+                                <img src="~/Images/edit.svg" alt="edit">
+                            </a>
+                            <a href="@Url.Action("Delete", "Subtask", new { id = item.SubtaskId })">
+                                <img src="~/Images/delete.svg" alt="delete">
+                            </a>
+                        </td>
+                        @{
+                            sum += item.Pricing;
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <h5>Total sum is: @sum</h5>
+        </div>
+    </div>
+</main>

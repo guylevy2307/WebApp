@@ -1,0 +1,91 @@
+﻿@model IpWebApp.Models.Client
+
+
+
+<div class="row">
+    <div class="records table-list">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().Name)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().Client.Name)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().Type)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().Country)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().ApplicationDate)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().RegistrationDate)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().RegistrationNumber)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().NextActionDate)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Records.FirstOrDefault().RenewalDate)
+                    </th>
+                    <th scope="col" class="col-sm-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in @Model.Records)
+                {
+                    <tr>
+                        <td class="col">
+                            @Html.ActionLink(item.Name, "Details", "Record", new { id = item.RecordId }, new { })
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.Client.Name)
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.ApplicationDate)
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.RegistrationDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.NextActionDate)
+                        </td>
+                        <td class="col">
+                            @Html.DisplayFor(modelItem => item.RenewalDate)
+                        </td>
+
+                        <td class="table-row-menu icons col-sm-4">
+                            <a href="@Url.Action("Details", "Record", new { id = item.RecordId })">
+                                <img src="~/Images/edit.svg" alt="edit">
+                            </a>
+                            <a href="@Url.Action("Delete", "Record", new { id = item.RecordId })">
+                                <img src="~/Images/delete.svg" alt="delete">
+                            </a>
+                        </td>
+
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

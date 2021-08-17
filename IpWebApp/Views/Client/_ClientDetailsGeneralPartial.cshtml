@@ -1,0 +1,51 @@
+﻿@model IpWebApp.Models.Client
+
+
+<div class="row">
+
+
+    <div class="col-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "clientName form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactName, htmlAttributes: new { @class = "contactName form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new {  @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Referent, htmlAttributes: new { @class = "form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.Referent, new { htmlAttributes = new {  @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.Referent, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.VatNumber, htmlAttributes: new { @class = "vatNumber form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.VatNumber, new { htmlAttributes = new {  @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.VatNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-4 second-col-wrapper px-0">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactEmail, htmlAttributes: new { @class = "billingContactName form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactPosition, htmlAttributes: new { @class = "billingContactName form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.ContactPosition, new { htmlAttributes = new { @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.ContactPosition, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "billingContactName form-label-font-size normal-font-style" })
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control form-field-font-size mt-2 pb-2 px-0" } })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+</div>
