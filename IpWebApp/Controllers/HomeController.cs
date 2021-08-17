@@ -34,6 +34,12 @@ namespace IpWebApp.Controllers
             }
             return View();
         }
+        [Authorize]
+        public ActionResult StockMarket()
+        {
+         
+            return View();
+        }
         //public ActionResult About()
         //{
         //    ViewBag.Message = "Your application description page.";

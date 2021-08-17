@@ -60,12 +60,12 @@
                                 <a class="nav-btn header-record-link " href="@Url.Action("Index", "Record", "Record")">Records</a>
                                 <a class="nav-btn header-task-link " href="@Url.Action("Index", "Task", "Task")">Tasks</a>
                                 <a class="nav-btn header-task-link " href="@Url.Action("Index", "Locations", "Locations")">Locations</a>
-
+                                <a class="nav-btn header-task-link " href="@Url.Action("StockMarket", "Home", "")">Stock Market</a>
                                 @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
 
                                 @*<a class="nav-btn" href="@Url.Action("Index", "TamplateTasks", "TamplateTasks")">Tamplate Task</a>*@
                                 <!--
-                                -->
+    -->
                                 <!--@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })-->
                             </nav>
                             <div class="user d-flex align-items-center" style="margin-right:39px">
@@ -110,7 +110,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - Cligal</p>
+                <p>&copy; @DateTime.Now.Year - The Gang</p>
             </footer>
         </div>
 

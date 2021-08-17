@@ -664,6 +664,7 @@
     <Content Include="Views\Locations\Edit.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Locations\LocationByClientIdPartial.cshtml" />
+    <Content Include="Views\Home\StockMarket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
