@@ -338,6 +338,10 @@
     <Compile Include="Migrations\202108031831492_mig27.Designer.cs">
       <DependentUpon>202108031831492_mig27.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108180817578_update.cs" />
+    <Compile Include="Migrations\202108180817578_update.designer.cs">
+      <DependentUpon>202108180817578_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\FileValidation.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -665,6 +669,8 @@
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Locations\LocationByClientIdPartial.cshtml" />
     <Content Include="Views\Home\StockMarket.cshtml" />
+    <Content Include="Views\Locations\GroupByCountry.cshtml" />
+    <Content Include="Views\Home\supportUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
@@ -754,6 +760,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108031831492_mig27.resx">
       <DependentUpon>202108031831492_mig27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108180817578_update.resx">
+      <DependentUpon>202108180817578_update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\IpWebApp.Migrations.mig1.resources" />
     <EmbeddedResource Include="obj\Debug\IpWebApp.Migrations.mig10.resources" />

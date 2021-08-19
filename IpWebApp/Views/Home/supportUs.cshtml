@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "supportUs";
+}
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+<link rel="stylesheet" href="~/Content/details-page.css">
+<link rel="stylesheet" href="~/Content/style.css">
+<main class="container">
+    <h2>Support Us</h2>
+
+    <canvas id="myCanvas" width="500" height="100" style="border:3px solid #000000;">
+    </canvas>
+
+    <video width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+    </video>
+</main>
+
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.font = "35px Arial";
+ctx.strokeText("Thank you for the support! :)", 10, 50);
+</script>

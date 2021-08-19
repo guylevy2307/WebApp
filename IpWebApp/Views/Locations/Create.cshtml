@@ -25,8 +25,8 @@
                     <div class="form-group">
                         Country Name:
                         <div class="col-md-10">
-                            <input name="CityName" type="text" class="form-control" id="CityName" placeholder="" value="@Html.DisplayFor(model => model.CityName)">
-                            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+                            <input name="PriorityCountry" type="text" class="form-control" id="PriorityCountry" placeholder="" value="@Html.DisplayFor(model => model.PriorityCountry)">
+                            @Html.ValidationMessageFor(model => model.PriorityCountry, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#CityName").autocomplete({
+        $("#PriorityCountry").autocomplete({
             source: function (request, response) {
                 $.ajax({
                     url: "/Record/GetCountriesByPrefix",

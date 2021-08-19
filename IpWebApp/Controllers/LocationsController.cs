@@ -15,13 +15,15 @@ namespace IpWebApp.Controllers
         private IpDbContext db = new IpDbContext();
 
         // GET: Locations
+        [Authorize]
         public ActionResult Index()
         {
-            var locations = db.Locations.Include(l => l.Client);
-            return View(locations.ToList());
+            var locations1 = db.Locations.Include(l => l.Client);
+            return View(locations1.ToList());
         }
 
         // GET: Locations/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace IpWebApp.Controllers
         }
 
         // GET: Locations/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.LocationId = new SelectList(db.Client, "ClientId", "Name");
@@ -48,7 +51,8 @@ namespace IpWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LocationId,CityName,Latitude,Longitude")] Location location)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "LocationId,PriorityCountry,Latitude,Longitude")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +71,7 @@ namespace IpWebApp.Controllers
         }
 
         // GET: Locations/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,7 +92,8 @@ namespace IpWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LocationId,CityName,Latitude,Longitude")] Location location)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "LocationId,PriorityCountry,Latitude,Longitude")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +106,7 @@ namespace IpWebApp.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace IpWebApp.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Location location = db.Locations.Find(id);
@@ -139,5 +147,24 @@ namespace IpWebApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult GroupByCountry()
+        {
+            List<Record> records = db.Record.ToList();
+            List<Location> locations = db.Locations.ToList();
+            var result = from record in records
+                         join location in locations
+                         on record.Country
+                         equals location.PriorityCountry
+                         select new { record.Country };
+            var groupedResult = from r in result
+                                group r by r.Country into grp
+                                select new { key = grp.Key, cnt = grp.Count() };
+            ViewBag.data = groupedResult.ToList();
+            return View();
+
+
+        }
+
     }
 }

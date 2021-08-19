@@ -13,7 +13,7 @@ namespace IpWebApp.Models
         public int LocationId { get; set; }
         [Required(ErrorMessage = "Please enter city name")]
         [Display(Name = "City Name")]
-        public string CityName { get; set; }
+        public string PriorityCountry { get; set; }
         [Required(ErrorMessage = "Please enter city latitude")]
         public double Latitude { get; set; }
         [Required(ErrorMessage = "Please enter city longitude ")]

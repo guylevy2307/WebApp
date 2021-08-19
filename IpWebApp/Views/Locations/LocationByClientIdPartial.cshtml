@@ -11,9 +11,14 @@
         <script src="~/scripts/jquery.validate.min.js"></script>
         <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
         <script type="text/javascript">
-
-            var latitude = @Html.Raw(Model.Latitude);
-            var long =@Html.Raw(Model.Longitude);
+            if ( @(Model.Latitude) == null) {
+                var latitude = 0;
+            }
+            else { var latitude = @Html.Raw(Model.Latitude); }
+              if (@Model== null) {
+                  var longitude = 0;
+            }
+              else var longitude = @Html.Raw(Model.Longitude);
             window.onload = function () {
                 var mapOptions = {
                     center: new google.maps.LatLng(latitude, long),
@@ -33,7 +38,18 @@
             }
 
         </script>
-        <h3>Client Location Info:</h3> <br/> City Name: @Model.CityName <br/>
+        @{string country;
+            if (Model == null)
+            {
+                country = "No country";
+
+            }
+            else
+            {
+                country = Model.PriorityCountry;
+            }
+        }
+        <h3>Client Location Info:</h3> <br /> Country Name: @country <br />
         <div id="dvMap" class="card" style="width: 300%; height: 400px">
         </div>
     </div>

@@ -34,6 +34,13 @@ namespace IpWebApp.Controllers
             }
             return View();
         }
+
+        [Authorize]
+        public ActionResult supportUs()
+        {
+            
+            return View();
+        }
         [Authorize]
         public ActionResult StockMarket()
         {
