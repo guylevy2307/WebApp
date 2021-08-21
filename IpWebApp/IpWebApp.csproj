@@ -552,6 +552,7 @@
     <Content Include="Images\right-arrow.svg" />
     <Content Include="Images\settings-icon.svg" />
     <Content Include="Images\user.svg" />
+    <Content Include="Images\video\The Thank You Song.mp4" />
     <Content Include="obj\Debug\IpWebApp.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

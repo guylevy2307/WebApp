@@ -1,8 +1,36 @@
-﻿
+﻿@model IpWebApp.Controllers.LocationsController.RecoredLocation
 @{
     ViewBag.Title = "GroupByCountry";
 }
 
 <h2>Group By Country</h2>
+<div class="row">
+    <div class="records table-list panel">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Country Name</th>
+                    <th scope="col">Number of Records</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ( ViewBag.data))
+                {
+                    <tr>
+                        <td>
+                          
+                                 @(item.key)
+                        </td>
+                        <td>
+                          
+                                 @(item.cnt)
+                        </td>
 
+                    </tr>
+                }
 
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -159,12 +159,17 @@ namespace IpWebApp.Controllers
                          select new { record.Country };
             var groupedResult = from r in result
                                 group r by r.Country into grp
-                                select new { key = grp.Key, cnt = grp.Count() };
-            ViewBag.data = groupedResult.ToList();
+                                select new RecoredLocation { key = grp.Key, cnt = grp.Count() };
+                ViewBag.data = groupedResult.ToList();
             return View();
-
-
         }
 
+        public class RecoredLocation
+        {
+            public string key { get; set; }
+            public int cnt { get; set; }
+        }
     }
+
+    
 }
