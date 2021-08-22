@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "supportUs";
 }
@@ -10,7 +11,7 @@
     <table>
         <tr>
             <td>
-                <canvas id="myCanvas" width="500" height="100" >
+                <canvas id="myCanvas" width="500" height="100">
                 </canvas>
             </td>
         </tr>
@@ -22,14 +23,72 @@
                 </video>
             </td>
         </tr>
+        <tr>
+            <td>
+                @using (Html.BeginForm("supportUs", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-control">
+                        <label class="label-primary">     Enter Your Tweet  </label>
+                        <input type="text" id="message" name="message"/>
+                        <div class="form-group">
+                            <label for="title" class="form-label-font-size normal-font-style">Choose Files</label>
+                            <div class="col-12">
+                                <div class="d-flex flex-row justify-content-center field-border" style="/*padding-left:10%;*/ height:163px;">
+                                    <img id="blah" src="#" style="display:none" height="163px">
+                                    <div style="top:65%;right:36%;">
+                                    <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+                                        <input type="image" src="/Images/add.svg" style="height:32px; width:32px;border-bottom:none !important">
+                                        <label for="title" class="row form-label-font-size normal-font-style">Choose Files</label>
+                               <input id="path" name="path" hidden />
+                                    </div>
+                                </div>
+                                <script>
+                                    $("input[type='image']").click(function (event) {
+                                        event.preventDefault();
+                                        $("input[id='image']").click();
+                                        return false;
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <input type="submit" value="Submit" />
+                    </div>
+                }
+            </td>
+
+        </tr>
     </table>
-    
+
+
 </main>
 
 
 <script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.font = "35px Arial";
-ctx.strokeText("Thank you for the support! :)", 10, 50);
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.font = "35px Arial";
+    ctx.strokeText("Thank you for the support! :)", 10, 50);
+</script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+                $('#blah').attr('style', "normal");
+                $('#path').val = e.target.result;
+                          console.log(e.target.result);
+
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+
+    }
+
+    $("#image").change(function () {
+        readURL(this);
+    });
 </script>
