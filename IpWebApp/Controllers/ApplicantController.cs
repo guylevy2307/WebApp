@@ -82,6 +82,10 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            if (!(applicant.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
+            {
+                return RedirectToAction("NoPremission", "Home");
+            }
             return View(applicant);
         }
 

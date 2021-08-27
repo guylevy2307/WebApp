@@ -1,82 +1,88 @@
 ﻿
 @model IEnumerable<IpWebApp.Models.TamplateTask>
 
-@{
-    ViewBag.Title = "TemplateTasksPartial";
-}
+@{ ViewBag.Title = "TemplateTasksPartial"; }
+<link rel="stylesheet" href="~/Content/style.css">
+<link rel="stylesheet" href="~/Content/listing-page.css">
+<div class="tasks table-list panel">
 
-    <div class="tasks table-list panel">
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.AddDays)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.AddMonths)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.AddYears)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Pricing)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.dateType)
+                </th>
+                <th scope="col" class="empty"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td class="col">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.AddDays)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.AddMonths)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.AddYears)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Pricing)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.dateType)
-                    </th>
-                    <th scope="col" class="empty"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+        <a href="@Url.Action("Details", "TamplateTasks", new { id = item.TamplateTaskId })">
+            @item.Title
+        </a>
+        <!--   @Html.DisplayFor(modelItem => item.Title)-->
+    </td>
+    <td class="col">
+
+                        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td class="col">
+        @Html.DisplayFor(modelItem => item.AddDays)
+    </td>
+    <td class="col">
+        @Html.DisplayFor(modelItem => item.AddMonths)
+    </td>
+    <td class="col">
+        @Html.DisplayFor(modelItem => item.AddYears)
+    </td>
+    <td class="col">
+        @Html.DisplayFor(modelItem => item.Pricing)
+    </td>
+    <td class="col-2">
+        @Html.DisplayFor(modelItem => item.dateType)
+    </td>
+    <td class="col"></td>
+    <td class="table-row-menu icons">
+        @{ if (User.IsInRole("Admin") || item.creatorId.Equals(User.Identity.Name))
+            {
+<a href="@Url.Action("Edit", "TamplateTasks", new { id = item.TamplateTaskId })">
+    <img src="~/Images/edit.svg" alt="edit">
+</a>
+                    <a href="@Url.Action("Delete", "TamplateTasks", new { id = item.TamplateTaskId })">
+                        <img src="~/Images/delete.svg" alt="delete">
+                    </a> }
+                else
                 {
-                    <tr>
-                        <td class="col">
+<a href="@Url.Action("Details", "TamplateTasks", new { id = item.TamplateTaskId })">
+    <img src="~/Images/edit.svg" alt="edit">
+</a> } }
 
-                            <a href="@Url.Action("Details", "TamplateTasks", new { id = item.TamplateTaskId })">
-                                @item.Title
-                            </a>
-                            <!--   @Html.DisplayFor(modelItem => item.Title)-->
-                        </td>
-                        <td class="col">
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td class="col">
-                            @Html.DisplayFor(modelItem => item.AddDays)
-                        </td>
-                        <td class="col">
-                            @Html.DisplayFor(modelItem => item.AddMonths)
-                        </td>
-                        <td class="col">
-                            @Html.DisplayFor(modelItem => item.AddYears)
-                        </td>
-                        <td class="col">
-                            @Html.DisplayFor(modelItem => item.Pricing)
-                        </td>
-                        <td class="col-2">
-                            @Html.DisplayFor(modelItem => item.dateType)
-                        </td>
-                        <td class="col"></td>
-                        <td class="table-row-menu icons">
-                            <a href="@Url.Action("Details", "TamplateTasks", new {id = item.TamplateTaskId})">
-                                <img src="~/Images/edit.svg" alt="edit">
-                            </a>
-                            <a href="@Url.Action("Delete", "TamplateTasks", new {id = item.TamplateTaskId})">
-                                <img src="~/Images/delete.svg" alt="delete">
+    </td>
 
-                            </a>
-                        </td>
-
-                    </tr>
-                }
-            </tbody>
-        </table >
-    </div>
+</tr>}
+        </tbody>
+    </table>
+</div>

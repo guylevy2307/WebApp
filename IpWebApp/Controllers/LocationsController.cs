@@ -83,6 +83,10 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            if (!(location.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
+            {
+                return RedirectToAction("NoPremission", "Home");
+            }
             ViewBag.LocationId = new SelectList(db.Client, "ClientId", "Name", location.LocationId);
             return View(location);
         }
