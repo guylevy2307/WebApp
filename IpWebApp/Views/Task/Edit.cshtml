@@ -1,77 +1,144 @@
-﻿@model IpWebApp.Models.Task
+﻿@using IpWebApp.Models
+@model IpWebApp.Models.Task
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "Edit"; }
 
 
-    <link rel="stylesheet" href="~/Content/create-page.css">
-    <link rel="stylesheet" href="~/Content/edit-create-pages.css">
+<link rel="stylesheet" href="~/Content/details-page.css">
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+<link rel="stylesheet" href="~/Content/listing-page.css">
 
-<!--
-This view should not be used    
-Use task details view instead
--->
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Task</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.TaskId)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+<main class="container">
+    <div class="row">
+        <div class="back">
+            <a href="@Url.Action("Index", "Task", "Task")">< Tasks</a>
         </div>
     </div>
+    <div class="row mt-5">
+        <h2 class="task-detail-heading">Task Details</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-panel-details">
+            @using (Html.BeginForm("Edit", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+@Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                <div class="row edit-task-form">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TaskId)
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="title" class="form-label-font-size normal-font-style">Title</label>
+                            <input name="title" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="title" value="@Html.DisplayFor(model => model.Title)">
+                        </div>
+                        <div class="form-group">
+
+                            <label for="pricing" class="form-label-font-size normal-font-style">Pricing</label>
+                            <input name="pricing" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="pricing" value="@Html.DisplayFor(model => model.Pricing)">
+                        </div>
+                        <div class="form-group">
+                            <label for="Status" class="form-label-font-size normal-font-style">Status</label>
+                            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control", id = "Status", name = "Status" })
+
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "form-label-font-size normal-font-style" })
+                            <input name="Deadline" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-action-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.Deadline)">
+                            @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger " })
+
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="RecordName" class="form-label-font-size normal-font-style">Record</label>
+                            <input name="RecordName" disabled type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="RecordName" value="@Html.DisplayFor(model => model.Record.Name)">
+                            <input name="RecordId" id="RecordId" value="@Html.DisplayFor(model => model.Record.RecordId)" hidden>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="Client" class="form-label-font-size normal-font-style">Client Name</label>
+                            <input name="ClientName" disabled type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="ClientName" value="@Html.DisplayFor(model => model.Record.Client.Name)">
+                            <input name="Client" id=" Client" value="@Html.DisplayFor(model => model.Record.Client.ClientId)" hidden>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label-font-size normal-font-style">Assignee:</label>
+                            <div class="select-wrapper col">
+                                @Html.DropDownListFor(model => model.Assignee, ViewBag.Users as SelectList, new { @class = "form-control", id = "Assignee", name = "Assignee" })
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="Description" class="form-label-font-size normal-font-style">Description</label>
+                            <textarea name="Description" class="description field-border w-100" id="Description" style="height:175px">@Html.DisplayFor(model => model.Description)</textarea>
+
+                        </div>
+                    </div>
+                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="form-submit d-flex   col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Save" class="btn-submit" />
+                                        </div>
+                                    </div>
+
+                                </div>            }
+            <div class="subtasks">
+                <div class="heading col-12 d-flex align-items-left justify-content-between">
+                    @Html.ActionLink("Add New Subtask", "CreateById", "Subtask", new { Id = Model.TaskId }, htmlAttributes: null)
+                </div>
+                <div class="heading col-12 d-flex align-items-center justify-content-between">
+                    <h2 class="page-heading-font-size">Subtasks</h2>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane  active form-tab-details " id="tab_1">
+
+                        <table class="table">
+                            <thead>
+
+                                <tr>
+                                    <th scope="col" class="form-text-color">Title</th>
+                                    <th scope="col" class="form-text-color">Description</th>
+                                    <th scope="col" class="form-text-color">Deadline</th>
+                                    <th scope="col" class="form-text-color">Status</th>
+                                    <th scope="col" class="form-text-color">Pricing</th>
+                                    <th scope="col" class="empty"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Subtasks)
+                                {
+                    <tr>
+                        <td class="col">@Html.ActionLink(item.Title, "Details", "Subtask", new { id = item.SubtaskId }, htmlAttributes: null) </td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td class="col"> @Convert.ToDateTime(item.Deadline).ToString("dd/MM/yyyy")</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td class="col">@Html.DisplayFor(modelItem => item.Pricing)</td>
+
+                        <td class="table-row-menu icons">
+                            <a href="@Url.Action("Details", "Subtask", new { id = item.SubtaskId })">
+                                <img src="~/Images/edit.svg" alt="edit">
+                            </a>
+                            <a href="@Url.Action("Delete", "Subtask", new { id = item.SubtaskId })">
+                                <img src="~/Images/delete.svg" alt="delete">
+                            </a>
+                        </td>
+                    </tr>}
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Pricing, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Pricing, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</main>
