@@ -368,6 +368,10 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            if (!(record.creatorId.Equals(User.Identity.Name))||!User.IsInRole("Admin") )
+            {
+                return RedirectToAction("NoPremission","Home");
+            }
             ViewBag.ClientId = new SelectList(db.Client, "ClientId", "Name", record.ClientId);
             ViewBag.ParentId = new SelectList(db.Record, "ParentId", "Name", record.ParentId);
             return View(record);
