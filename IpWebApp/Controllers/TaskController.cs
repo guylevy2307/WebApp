@@ -116,7 +116,7 @@ namespace IpWebApp.Controllers
             }
             if (!(task.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
             {
-                return RedirectToAction("NoPermission", "Home");
+                return RedirectToAction("NoPremission", "Home");
             }
             ViewBag.Users = new SelectList(UserDb.Users, "Email", "Email", User.Identity.GetUserName());
             return View(task);

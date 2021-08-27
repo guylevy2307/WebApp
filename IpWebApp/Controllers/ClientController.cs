@@ -131,7 +131,7 @@ namespace IpWebApp.Controllers
             }
             if (!(client.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
             {
-                return RedirectToAction("NoPermission","Home");
+                return RedirectToAction("NoPremission", "Home");
             }
             return View(client);
         }
