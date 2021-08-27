@@ -86,7 +86,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "TaskId,Title,Description,Deadline,Pricing,Status,RecordId,Client,Assignee")] Task task)
+        public ActionResult Create([Bind(Include = "TaskId,Title,Description,Deadline,Pricing,Status,RecordId,Client,Assignee,creatorID")] Task task)
         {
 
             if (ModelState.IsValid)

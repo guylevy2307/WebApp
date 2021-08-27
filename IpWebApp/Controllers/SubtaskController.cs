@@ -64,7 +64,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "SubtaskId,Title,Description,Deadline,Status,MainTaskId,Pricing")] Subtask subtask)
+        public ActionResult Create([Bind(Include = "SubtaskId,Title,Description,Deadline,Status,MainTaskId,Pricing,creatorID")] Subtask subtask)
         {
             subtask.MainTask = db.Task.FirstOrDefault(x=>x.TaskId==subtask.MainTaskId);
             subtask.Status = TaskStatus.Pending;
