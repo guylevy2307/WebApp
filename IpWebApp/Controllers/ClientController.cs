@@ -104,7 +104,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ClientId,Name,ContactName,ContactEmail,ContactPosition,BillingName,BillingEmail,Currency,Referent,Balance,Notes")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,Name,ContactName,ContactEmail,ContactPosition,BillingName,BillingEmail,Currency,Referent,Balance,Notes,creatorId")] Client client)
         {
             if (ModelState.IsValid)
             {

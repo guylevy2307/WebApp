@@ -140,7 +140,7 @@ namespace IpWebApp.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
 
-        public ActionResult Create([Bind(Include = "RecordId,Type,Name,RegistrationDate,RenewalDate,RegistrationNumber,ClientId,Inventor,Classes,ApplicationDate,ExpirationDate,NextActionDate,Country,Notes,Priority,PriorityCountry,PriorityNumber,PriorityDate,ParentId")] Record record, [Bind(Include = /*ApplicantId,*/"ApplicantName,Phone,Address,Formation,POA")] Applicant app, [Bind(Include = "ApplicantIdList")] string ApplicantIdList)
+        public ActionResult Create([Bind(Include = "RecordId,Type,Name,RegistrationDate,RenewalDate,RegistrationNumber,ClientId,Inventor,Classes,ApplicationDate,ExpirationDate,NextActionDate,Country,Notes,Priority,PriorityCountry,PriorityNumber,PriorityDate,ParentId,creatorId")] Record record, [Bind(Include = /*ApplicantId,*/"ApplicantName,Phone,Address,Formation,POA")] Applicant app, [Bind(Include = "ApplicantIdList")] string ApplicantIdList)
         {
             record.Client = db.Client.Find(record.ClientId);
             record.Parent = db.Record.Find(record.ParentId);
