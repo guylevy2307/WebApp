@@ -89,6 +89,11 @@ namespace IpWebApp.Controllers
          
             return View();
         }
+        public ActionResult NoPremission()
+        {
+
+            return View();
+        }
         //public ActionResult About()
         //{
         //    ViewBag.Message = "Your application description page.";

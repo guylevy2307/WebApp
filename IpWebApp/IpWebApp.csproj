@@ -561,6 +561,7 @@
     <Content Include="Images\LogoEnglish.svg" />
     <Content Include="Images\right-arrow.svg" />
     <Content Include="Images\settings-icon.svg" />
+    <Content Include="Images\sorry.jpg" />
     <Content Include="Images\user.svg" />
     <Content Include="Images\video\The Thank You Song.mp4" />
     <Content Include="obj\Debug\IpWebApp.csproj.FileListAbsolute.txt" />
@@ -682,6 +683,7 @@
     <Content Include="Views\Home\StockMarket.cshtml" />
     <Content Include="Views\Locations\GroupByCountry.cshtml" />
     <Content Include="Views\Home\supportUs.cshtml" />
+    <None Include="Views\Home\NoPremission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
