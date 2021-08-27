@@ -69,12 +69,23 @@
 
                         </td>
                         <td class="table-row-menu icons">
-                            <a href="@Url.Action("Details", "Client", new { id = item.ClientId })">
-                                <img src="~/Images/edit.svg" alt="edit">
-                            </a>
-                            <a href="@Url.Action("Delete", "Client", new { id = item.ClientId })">
-                                <img src="~/Images/delete.svg" alt="delete">
-                            </a>
+                            @{ if (User.IsInRole("Admin") || item.creatorId.Equals(User.Identity.Name))
+                                {
+                                                    <a href="@Url.Action("Edit", "Client", new { id = item.ClientId })">
+                                                        <img src="~/Images/edit.svg" alt="edit">
+                                                    </a>
+                                                    <a href="@Url.Action("Delete", "Client", new { id = item.ClientId })">
+                                                    <img src="~/Images/delete.svg" alt="delete">
+                                                    </a>
+                               }
+                                else
+                                {
+                                        <a href="@Url.Action("Details", "Client", new { id = item.ClientId })">
+                                         <img src="~/Images/edit.svg" alt="edit">
+                                        </a>
+
+                                }
+                            }
                         </td>
                     </tr>
                     }

@@ -15,8 +15,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="form-panel-details">
-            @using (Html.BeginForm("Edit", "Subtask", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
+           
                 @Html.AntiForgeryToken()
 
             <div class="row edit-task-form">
@@ -57,18 +56,7 @@
                 </div>
                 <div class="col"></div>
             </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="form-submit d-flex   col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn-submit" />
-                        </div>
-                    </div>
-
-                </div>
-
-
-            }
-
+             
 
         </div>
     </div>

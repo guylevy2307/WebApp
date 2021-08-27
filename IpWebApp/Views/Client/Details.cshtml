@@ -2,108 +2,94 @@
 
 @{ ViewBag.Title = "Details"; }
 
-<link rel="stylesheet" href="~/Content/create-page.css">
-<link rel="stylesheet" href="~/Content/edit-create-pages.css">
 
-<h2>Details</h2>
+<link rel="stylesheet" href="~/Content/edit-create-pages.css">
+<link rel="stylesheet" href="~/Content/details-page.css">
 
 
 
 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <h4>Client</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ClientId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ClientId)
+                                                <div>
+                                                    <main class="container">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                        <div class="row">
+                                                            <div class="back">
+                                                                <a href="@Url.Action("Index", "Client", "Client")">< Clients</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-5">
+                                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ContactName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                            <h2><span id="client-name">@Html.DisplayFor(model => model.Name)</span></h2>
+                                                        </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ContactEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                        <div class="row justify-content-center" style="margin-right:20px">
+                                                            <div class="form-panel-details">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ContactPosition, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ContactPosition, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ContactPosition, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                <form id="edit-client-form">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BillingName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BillingName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BillingName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                    <div class="row ">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BillingEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BillingEmail, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BillingEmail, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                        <div class="tab-content">
+                                                                            <ul class="nav nav-tabs  pb-0  ">
+                                                                                <li>
+                                                                                    <a href="#tab_1" data-toggle="tab" class="text-secondary active"> General </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="#tab_2" data-toggle="tab" class="text-secondary"> Billing </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="#tab_3" data-toggle="tab" class="text-secondary"> Records </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="#tab_4" data-toggle="tab" class="text-secondary"> Tasks </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="#tab_5" data-toggle="tab" class="text-secondary"> Applicants </a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="#tab_6" data-toggle="tab" class="text-secondary "> Location </a>
+                                                                                </li>
+                                                                            </ul>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EnumDropDownListFor(model => model.Currency, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                            <div class="tab-content">
+                                                                                <div class="tab-pane  active form-tab-details " id="tab_1">
+                                                                                    @Html.Partial("_ClientDetailsGeneralPartial", @Model)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Referent, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Referent, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Referent, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                                </div>
+                                                                                <div class="tab-pane fade  form-tab-details" id="tab_2">
+                                                                                    @Html.Partial("_ClientDetailsBillingPartial", @Model)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Balance, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Balance, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                                </div>
+                                                                                <div class="tab-pane fade form-tab-details" id="tab_3">
+                                                                                    @Html.Partial("_ClientDetailsRecordsPartial", @Model)
+                                                                                </div>
+                                                                                <div class="tab-pane fade  form-tab-details" id="tab_4">
+                                                                                    @{ Html.RenderAction("TasksByClientIdPartial", "Client", new { id = Model.ClientId }); }
+                                                                                </div>
+                                                                                <div class="tab-pane fade  form-tab-details" id="tab_5">
+                                                                                    @{ Html.RenderAction("ApplicantsByClientIdPartial", "Client", new { id = Model.ClientId }); }
+                                                                                </div>
+                                                                                <div class="tab-pane fade  form-tab-details" id="tab_6">
+                                                                                    @{ Html.RenderAction("LocationByClientIdPartial", "Locations", new { id = Model.ClientId }); }
+                                                                                </div>
 
-                    
-                </div>
+                                                                            </div>
+                                                                        </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                                                                    </div>
+                                                                   
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </main>
+                                                </div>
