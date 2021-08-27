@@ -18,7 +18,8 @@ namespace IpWebApp.Models
         public double Latitude { get; set; }
         [Required(ErrorMessage = "Please enter city longitude ")]
         public double Longitude { get; set; }
-        
+        public string creatorId { get; set; }
+
         public virtual Client Client { get; set; }
 }
 }

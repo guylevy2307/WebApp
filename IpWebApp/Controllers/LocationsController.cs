@@ -52,7 +52,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "LocationId,PriorityCountry,Latitude,Longitude")] Location location)
+        public ActionResult Create([Bind(Include = "LocationId,PriorityCountry,Latitude,Longitude,creatorId")] Location location)
         {
             if (ModelState.IsValid)
             {
