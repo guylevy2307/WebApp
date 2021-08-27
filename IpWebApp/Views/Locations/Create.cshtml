@@ -26,6 +26,7 @@
                         Country Name:
                         <div class="col-md-10">
                             <input name="PriorityCountry" type="text" class="form-control" id="PriorityCountry" placeholder="" value="@Html.DisplayFor(model => model.PriorityCountry)">
+
                             @Html.ValidationMessageFor(model => model.PriorityCountry, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -56,6 +57,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
