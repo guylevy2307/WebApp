@@ -105,8 +105,7 @@
                                 @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
                             </div>
 
-
-
+                            <input name="creatorId" type="text"  id="creatorId" value=@User.Identity.Name hidden>
 
                         </div>
                         <div class="form-group">

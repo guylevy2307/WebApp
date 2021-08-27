@@ -22,6 +22,7 @@ namespace IpWebApp.Models
         public virtual Task MainTask { get; set; }
 
         public double Pricing { get; set; }
+        public string creatorId { get; set; }
 
     }
 

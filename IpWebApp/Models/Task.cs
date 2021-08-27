@@ -25,6 +25,7 @@ namespace IpWebApp.Models
         public double Pricing { get; set; }
 
         public string Assignee { get; set; }
+        public string creatorId { get; set; }
 
         public virtual ICollection<Subtask> Subtasks { get; set; }
         public Task()

@@ -348,6 +348,10 @@
     <Compile Include="Migrations\202108180817578_update.designer.cs">
       <DependentUpon>202108180817578_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108271032394_migCreatorId.cs" />
+    <Compile Include="Migrations\202108271032394_migCreatorId.designer.cs">
+      <DependentUpon>202108271032394_migCreatorId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\FileValidation.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -770,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108180817578_update.resx">
       <DependentUpon>202108180817578_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271032394_migCreatorId.resx">
+      <DependentUpon>202108271032394_migCreatorId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\IpWebApp.Migrations.mig1.resources" />
     <EmbeddedResource Include="obj\Debug\IpWebApp.Migrations.mig10.resources" />

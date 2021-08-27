@@ -196,6 +196,7 @@
                                 @{ Html.RenderPartial("_CreateDesign"); }
                             </div>
                         </div>
+                        <input name="creatorId" type="text"  id="creatorId" value=@User.Identity.Name hidden>
 
                         <div id="applicantHolder" class="row" style="margin-left: 0px;padding-left: 0px;margin-right: 12px;padding-right: 0px;">
                             <div id="applicantFields" class="col-6" style="padding-left: calc(var(--bs-gutter-x)/ 2);">

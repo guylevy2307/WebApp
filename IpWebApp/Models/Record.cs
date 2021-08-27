@@ -88,7 +88,8 @@ namespace IpWebApp.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? PriorityDate { get; set; }
-   
+
+        public string creatorId { get; set; }
 
         public Record()
         {

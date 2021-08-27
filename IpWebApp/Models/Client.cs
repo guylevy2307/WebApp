@@ -47,6 +47,8 @@ namespace IpWebApp.Models
         public virtual ICollection<Record> Records { get; set; }
 
         public virtual Location Location { get; set; }
+
+        public string creatorId { get; set; }
         public Client()
         {
             Records = new List<Record>();
