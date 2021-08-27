@@ -14,7 +14,9 @@ namespace IpWebApp.Models
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Formation { get; set; }
-        public string POA { get; set; } 
+        public string POA { get; set; }
+        public string creatorId { get; set; }
+
         public virtual ICollection<Record> Records { get; set; }
 
         public Applicant()

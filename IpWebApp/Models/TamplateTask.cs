@@ -25,6 +25,8 @@ namespace IpWebApp.Models
         [Range(0, 100000000)]
         public double Pricing { get; set; }
         public DateType dateType { get; set; }
+        public string creatorId { get; set; }
+
     }
     public enum DateType
     {

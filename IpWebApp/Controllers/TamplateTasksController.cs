@@ -61,7 +61,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TamplateTaskId,Title,Description,AddDays,AddMonths,AddYears,Pricing,dateType")] TamplateTask tamplateTask)
+        public ActionResult Create([Bind(Include = "TamplateTaskId,Title,Description,AddDays,AddMonths,AddYears,Pricing,dateType,creatorId")] TamplateTask tamplateTask)
         {
             if (ModelState.IsValid)
             {

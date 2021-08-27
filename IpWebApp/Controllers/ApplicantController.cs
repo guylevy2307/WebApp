@@ -57,7 +57,7 @@ namespace IpWebApp.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApplicantId,ApplicantName,Phone,Address,Formation,POA")] Applicant applicant)
+        public ActionResult Create([Bind(Include = "ApplicantId,ApplicantName,Phone,Address,Formation,POA,creatorId")] Applicant applicant)
         {
             if (ModelState.IsValid)
             {
