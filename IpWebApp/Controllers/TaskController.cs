@@ -114,6 +114,11 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            if (!(task.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
+            {
+                return RedirectToAction("NoPermission", "Home");
+            }
+            ViewBag.Users = new SelectList(UserDb.Users, "Email", "Email", User.Identity.GetUserName());
             return View(task);
         }
 
