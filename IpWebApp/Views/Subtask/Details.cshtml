@@ -25,15 +25,15 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="title" class="form-label-font-size normal-font-style">Title</label>
-                            <input name="title" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="title" value="@Html.DisplayFor(model => model.Title)">
+                            <input disabled name="title" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="title" value="@Html.DisplayFor(model => model.Title)">
                         </div>
                         <div class="form-group">
                             <label for="status" class="form-label-font-size normal-font-style">Status</label>
-                            <input name="status" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="status" value="@Html.DisplayFor(model => model.Status)">
+                            <input disabled name="status" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="status" value="@Html.DisplayFor(model => model.Status)">
                         </div>
                         <div class="form-group">
                             <label for="pricing" class="form-label-font-size normal-font-style">Pricing</label>
-                            <input name="pricing" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="pricing" value="@Html.DisplayFor(model => model.Pricing)">
+                            <input disabled name="pricing" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="pricing" value="@Html.DisplayFor(model => model.Pricing)">
                         </div>
 
 
@@ -42,7 +42,7 @@
                     <div class="col">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "form-label-font-size normal-font-style" })
-                            <input name="Deadline" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-action-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.Deadline)">
+                            <input disabled name="Deadline" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-action-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.Deadline)">
                             @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger " })
 
 

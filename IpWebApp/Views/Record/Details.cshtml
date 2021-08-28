@@ -61,7 +61,7 @@
                                                                         <div class="form-group">
                                                                             <label for="clientld" class="form-label-font-size normal-font-style">Client</label>
                                                                             <input type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="ClientName" value="@Html.DisplayFor(model => model.Client.Name)">
-                                                                            <input name="Clientid" type="hidden" class="form-control" id="ClientId" value="@Html.DisplayFor(model => model.ClientId)">
+                                                                            <input name="Clientid" type="hidden" class="form-control" id="ClientId" value="@Html.DisplayFor(model => model.ClientId)" disabled>
                                                                             @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
 
 
@@ -69,7 +69,7 @@
 
                                                                         <div class="form-group">
                                                                             <label for="territory" class="form-label-font-size normal-font-style">Territory</label>
-                                                                            <input name="Country" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="Country" value="@Html.DisplayFor(model => model.Country)">
+                                                                            <input name="Country" type="text" class="form-control form-field-font-size mt-2 pb-2 px-0" id="Country" value="@Html.DisplayFor(model => model.Country)" disabled>
 
                                                                             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
 
@@ -78,7 +78,7 @@
 
                                                                         <div class="form-group">
                                                                             @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "clientName form-label-font-size normal-font-style" })
-                                                                            <input name="ApplicationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="application-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.ApplicationDate)">
+                                                                            <input disabled name="ApplicationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="application-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.ApplicationDate)">
                                                                             @Html.ValidationMessageFor(model => model.ApplicationDate, "", new { @class = "text-danger " })
                                                                         </div>
 
@@ -87,24 +87,24 @@
                                                                     <div class="col">
                                                                         <div class="form-group">
                                                                             <label for="registration-date" class="form-label-font-size normal-font-style">Registration Date</label>
-                                                                            <input name="RegistrationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="registration-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.RegistrationDate)">
+                                                                            <input disabled name="RegistrationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="registration-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.RegistrationDate)">
                                                                             @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger " })
                                                                         </div>
                                                                         <div class="form-group">
                                                                             @Html.LabelFor(model => model.NextActionDate, htmlAttributes: new { @class = "clientName form-label-font-size normal-font-style" })
-                                                                            <input name="NextActionDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-action-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.NextActionDate)">
+                                                                            <input disabled name="NextActionDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-action-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.NextActionDate)">
                                                                             @Html.ValidationMessageFor(model => model.NextActionDate, "", new { @class = "text-danger " })
 
                                                                         </div>
                                                                         <div class="form-group">
                                                                             @Html.LabelFor(model => model.RenewalDate, htmlAttributes: new { @class = "clientName form-label-font-size normal-font-style" })
-                                                                            <input name="RenewalDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-renew-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.RenewalDate)">
+                                                                            <input disabled name="RenewalDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="next-renew-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.RenewalDate)">
                                                                             @Html.ValidationMessageFor(model => model.RenewalDate, "", new { @class = "text-danger " })
 
                                                                         </div>
                                                                         <div class="form-group">
                                                                             @Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "clientName form-label-font-size normal-font-style" })
-                                                                            <input name="ExpirationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="Expiration-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.ExpirationDate)">
+                                                                            <input disabled name="ExpirationDate" type="date" class="form-control w-100 form-field-font-size mt-2 pb-2 px-0" id="Expiration-date" placeholder="dd/MM/yyyy" value="@Html.DisplayFor(model => model.ExpirationDate)">
                                                                             @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger " })
 
                                                                         </div>
@@ -159,7 +159,7 @@
 
                                                                                 <div class="col w-100" style="height:100px">
                                                                                     <div class="field-border w-100 h-100">
-                                                                                        <input type="file" id="image" name="image" accept="image/*" style="display: none;" />
+                                                                                        <input disabled type="file" id="image" name="image" accept="image/*" style="display: none;" />
                                                                                         <div class="">
                                                                                             @if (Model.Image != null)
                                                                                             {
