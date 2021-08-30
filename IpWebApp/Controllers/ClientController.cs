@@ -196,12 +196,23 @@ namespace IpWebApp.Controllers
                     }
                     db.Record.Remove(r);
                 }
+
+                db.Locations.Remove(client.Location);
                 db.Client.Remove(client);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
+        [ChildActionOnly]
+        public ActionResult LocationByClientIdPartial(int id)
+        {
 
+            Location gps = db.Locations.FirstOrDefault(x => x.Client.ClientId == id);
+            if(gps==null)
+                return PartialView("LocationByClientIdPartial", null);
+            else 
+                return PartialView("LocationByClientIdPartial", gps);
+        }
         [Authorize]
         public ActionResult GenerateReport(int? id)
         {

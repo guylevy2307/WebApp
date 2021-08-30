@@ -56,11 +56,25 @@ namespace IpWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Locations.FirstOrDefault(x => x.Client.ClientId == location.LocationId) != null)
+                Client client = db.Client.Find( location.LocationId);
+                Location temp = db.Locations.Find(location.LocationId);
+                if (client != null)
                 {
-                    ViewBag.LocationId = new SelectList(db.Client, "ClientId", "Name", location.LocationId);
-                    return View(location);
+                    //need to update the location in client table
+
+                    db.Entry(client).State = EntityState.Modified;
+                    client.Location = location;
+                 
                 }
+               
+                else if (temp!=null)
+
+                {
+                    //need to update the location in location table
+                    db.Entry(temp).State = EntityState.Modified;
+
+                }
+                //no need to update nothing just create new
                 db.Locations.Add(location);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -136,13 +150,7 @@ namespace IpWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [ChildActionOnly]
-        public ActionResult LocationByClientIdPartial(int id)
-        {
-
-          Location gps = db.Locations.FirstOrDefault(x => x.Client.ClientId == id);
-            return PartialView("LocationByClientIdPartial", gps);
-        }
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
