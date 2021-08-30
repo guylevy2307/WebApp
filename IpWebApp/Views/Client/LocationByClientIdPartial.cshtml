@@ -22,9 +22,11 @@
 
                 var longitude = @Html.Raw(Model.Longitude);
             }
+            var latitude = 1.1;
+            var longitude = 1.1;
             window.onload = function() {
                 var mapOptions = {
-                    center: new google.maps.LatLng(latitude, long),
+                    center: new google.maps.LatLng(latitude, longitude),
                     zoom: 4,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
