@@ -28,6 +28,7 @@ namespace IpWebApp.Controllers
             }
             return View(tasks);
         }
+        //return the subtask of the task by id
         [Authorize]
         public ActionResult SubtaskByTaskId(int id)
         {
@@ -114,6 +115,7 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            //checking if the user has permissions
             if (!(task.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
             {
                 return RedirectToAction("NoPremission", "Home");
@@ -174,7 +176,7 @@ namespace IpWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
+            else //if is null return to the login page
             {
                 ViewBag.Users = new SelectList(UserDb.Users, "Email", "Email", User.Identity.GetUserName());
             
@@ -210,7 +212,7 @@ namespace IpWebApp.Controllers
             
            Task task = db.Task.Find(id);
            List<Subtask> subtasks = db.Subtasks.Where(x => x.MainTaskId == id).ToList();
-            
+            //removing the subtasks
             foreach(Subtask temp in subtasks)
             {
                 db.Subtasks.Remove(temp);
