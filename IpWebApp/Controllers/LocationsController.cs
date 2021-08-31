@@ -97,6 +97,7 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            //checking permissions
             if (!(location.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
             {
                 return RedirectToAction("NoPremission", "Home");
@@ -160,6 +161,7 @@ namespace IpWebApp.Controllers
             base.Dispose(disposing);
         }
 
+        //cheking how many records there are in each country
         public ActionResult GroupByCountry()
         {
             List<Record> records = db.Record.ToList();
