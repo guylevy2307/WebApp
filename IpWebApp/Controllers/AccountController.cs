@@ -159,11 +159,10 @@ namespace IpWebApp.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     var context = new ApplicationDbContext();
-                    var roleStore = new RoleStore<IdentityRole>(context);
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    var userStore = new UserStore<ApplicationUser>(context);
-                    var userManager = new UserManager<ApplicationUser>(userStore);
-                    userManager.AddToRole(user.Id, "Client");
+                    var roleStore = new RoleStore<IdentityRole>(context); //Pass the instance of your DbContext here
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                    var result1 = await this.UserManager.AddToRoleAsync(user.Id, "Client");
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -389,6 +388,12 @@ namespace IpWebApp.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        ///Todo adding role
+                        var context = new ApplicationDbContext();
+                        var roleStore = new RoleStore<IdentityRole>(context); //Pass the instance of your DbContext here
+                        var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                        var result1 = await this.UserManager.AddToRoleAsync(user.Id, "Client");
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -401,11 +406,12 @@ namespace IpWebApp.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            SignInManager.AuthenticationManager.SignOut();
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 

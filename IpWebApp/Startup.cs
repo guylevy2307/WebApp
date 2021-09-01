@@ -20,6 +20,7 @@ namespace IpWebApp
             .UseSqlServerStorage(
                 "IpDbContext",
                 new SqlServerStorageOptions { QueuePollInterval = TimeSpan.FromSeconds(1) });
+            createRolesandUsers();
 
             //app.UseHangfireDashboard();
             //using (var connection = JobStorage.Current.GetConnection())
@@ -36,7 +37,7 @@ namespace IpWebApp
             ////  RecurringJob.AddOrUpdate(() => temp.SendEmail(),Cron.Minutely());
             //RecurringJob.AddOrUpdate(() => temp.SendEmail(), Cron.Daily(9));
 
-            createRolesandUsers();
+           
         }
         // In this method we will create default User roles and Admin user for login    
         private void createRolesandUsers()
@@ -44,45 +45,46 @@ namespace IpWebApp
             ApplicationDbContext context = new ApplicationDbContext();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
+          //  var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            roleManager.Create(new IdentityRole { Name = "Admin" });
+            roleManager.Create(new IdentityRole { Name = "Client" });
 
             // creating first Admin Role and creating a default Admin User     
-            if (!roleManager.RoleExists("Admin"))
-            {
+            /*   if (!roleManager.RoleExists("Admin"))
+              {
 
-                // first we create Admin role   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admin";
-                roleManager.Create(role);
+                  // first we create Admin role   
+                  var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                  role.Name = "Admin";
+                  roleManager.Create(role);
 
-                //Here we create a Admin super user who will maintain the website                   
+                 //Here we create a Admin super user who will maintain the website                   
 
-                var user = new ApplicationUser();
-                user.UserName = "admin";
-                user.Email = "admin@gmail.com";
+                  var user = new ApplicationUser();
+                  user.UserName = "admin";
+                  user.Email = "admin@gmail.com";
 
-                string userPWD = "Adminadmin!";
+                  string userPWD = "Adminadmin!";
 
-                var chkUser = userManager.Create(user, userPWD);
+                  var chkUser = userManager.Create(user, userPWD);
 
-                //Add default User to Role Admin    
-                if (chkUser.Succeeded)
-                {
-                    var result1 = userManager.AddToRole(user.Id, "Admin");
+                  //Add default User to Role Admin    
+                  if (chkUser.Succeeded)
+                  {
+                      var result1 = userManager.AddToRole(user.Id, "Admin");
 
-                }
-            }
+                  }
+              }
 
-            // creating Creating Manager role     
-            if (!roleManager.RoleExists("Client"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Client";
-                roleManager.Create(role);
+              // creating Creating Manager role     
+              if (!roleManager.RoleExists("Client"))
+              {
+                  var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                  role.Name = "Client";
+                  roleManager.Create(role);
 
-            }
-
+              }
+                 */
         }
     }
 }
