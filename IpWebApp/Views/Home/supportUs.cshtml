@@ -27,31 +27,11 @@
                 @using (Html.BeginForm("supportUs", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="form-control">
-                        <label class="label-primary">     Enter Your Tweet  </label>
-                        <input type="text" id="message" name="message"/>
-                        <div class="form-group">
-                            <label for="title" class="form-label-font-size normal-font-style">Choose Files</label>
-                            <div class="col-12">
-                                <div class="d-flex flex-row justify-content-center field-border" style="/*padding-left:10%;*/ height:163px;">
-                                    <img id="blah" src="#" style="display:none" height="163px">
-                                    <div style="top:65%;right:36%;">
-                                    <input type="file" id="image" name="image" accept="image/*" style="display: none;">
-                                        <input type="image" src="/Images/add.svg" style="height:32px; width:32px;border-bottom:none !important">
-                                        <label for="title" class="row form-label-font-size normal-font-style">Choose Files</label>
-                               <input id="path" name="path" hidden />
-                                    </div>
-                                </div>
-                                <script>
-                                    $("input[type='image']").click(function (event) {
-                                        event.preventDefault();
-                                        $("input[id='image']").click();
-                                        return false;
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <input type="submit" value="Submit" />
-                    </div>
+                        <label class="label-primary">     Enter Your Tweet it will post in our tweeter page eith your email!  </label>
+                        <input type="text" id="message" name="message" size="100px"/>
+     
+                <input  class="btn-submit" type="submit" value="Submit" />
+                </div>
                 }
             </td>
 
