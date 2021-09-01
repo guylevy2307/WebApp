@@ -51,9 +51,9 @@
                                                                                 <li>
                                                                                     <a href="#tab_5" data-toggle="tab" class="text-secondary"> Applicants </a>
                                                                                 </li>
-                                                                                <li>
-                                                                                    <a href="#tab_6" data-toggle="tab" class="text-secondary "> Location </a>
-                                                                                </li>
+                                                                                @*    <li>
+            <a href="#tab_6" data-toggle="tab" class="text-secondary "> Location </a>
+        </li>*@
                                                                             </ul>
 
                                                                             <div class="tab-content">
@@ -74,10 +74,10 @@
                                                                                 <div class="tab-pane fade  form-tab-details" id="tab_5">
                                                                                     @{ Html.RenderAction("ApplicantsByClientIdPartial", "Client", new { id = Model.ClientId }); }
                                                                                 </div>
-                                                                                <div class="tab-pane fade  form-tab-details" id="tab_6">
-                                                                                    @{ Html.RenderAction("LocationByClientIdPartial", "Locations", new { id = Model.ClientId }); }
-                                                                                </div>
-
+                                                                                @*   <div class="tab-pane fade  form-tab-details" id="tab_6">
+            @{ Html.RenderAction("LocationByClientIdPartial", "Locations", new { id = Model.ClientId }); }
+        </div>
+                                                                                *@
                                                                             </div>
                                                                         </div>
 
