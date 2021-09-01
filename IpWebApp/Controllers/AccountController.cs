@@ -161,7 +161,13 @@ namespace IpWebApp.Controllers
                     var context = new ApplicationDbContext();
                     var roleStore = new RoleStore<IdentityRole>(context); //Pass the instance of your DbContext here
                     var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                    var result1 = await this.UserManager.AddToRoleAsync(user.Id, "Client");
+                    if (user.Email.Equals("admin@gmail.com"))
+                    {
+                        await this.UserManager.AddToRoleAsync(user.Id, "Admin");
+
+                    }
+                    else await this.UserManager.AddToRoleAsync(user.Id, "Client");
+
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -392,7 +398,9 @@ namespace IpWebApp.Controllers
                         var context = new ApplicationDbContext();
                         var roleStore = new RoleStore<IdentityRole>(context); //Pass the instance of your DbContext here
                         var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                        var result1 = await this.UserManager.AddToRoleAsync(user.Id, "Client");
+                        if(user.Email.Equals("admin@gmail.com"))
+                            await this.UserManager.AddToRoleAsync(user.Id, "Admin");
+                      else await this.UserManager.AddToRoleAsync(user.Id, "Client");
 
                         return RedirectToLocal(returnUrl);
                     }
