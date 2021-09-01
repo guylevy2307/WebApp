@@ -124,6 +124,7 @@ namespace IpWebApp.Controllers
         {
             ViewBag.RecordId = new SelectList(db.Record.Where(r => r.RecordId == Id), "RecordId", "Name");
             Record divisionalRecord = db.Record.FirstOrDefault(r => r.RecordId == Id);
+            //checking if the record is existing
             if (divisionalRecord != null)
             {
                 ViewData["recordName"] = divisionalRecord.Name;
@@ -186,6 +187,7 @@ namespace IpWebApp.Controllers
             }
             return View(record);
 
+            //converting string to int list
             #region AddApplicant local method
             void AddApplicantLocal(Record AddAppRecord, Applicant AddApp)
             {
@@ -331,7 +333,7 @@ namespace IpWebApp.Controllers
             return cover;
         }
 
-
+        //this function add applicant to the list of records and add record to the list of applicant
         [Authorize]
         [HttpPost]
         public ActionResult AddApplicant(String ApplicantId, String RecordId)
@@ -368,6 +370,7 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            //checking if the user has permissions
             if (!(record.creatorId.Equals(User.Identity.Name))||!User.IsInRole("Admin") )
             {
                 return RedirectToAction("NoPremission","Home");

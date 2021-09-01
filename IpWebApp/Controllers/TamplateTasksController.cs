@@ -14,17 +14,6 @@ namespace IpWebApp.Controllers
     {
         private IpDbContext db = new IpDbContext();
 
-        /*
-         * ▶▶▶▶▶▶▶ PAY ATTENTION!
-         * TEMPLATE TASKS INDEX VIEW IS CANCELLED!
-         * DO NO NOT USE IT ANYMORE,
-         * FROM NOW ON TEMPLATE TASKS INDEX VIEW IS 
-         * Task/_TemplateTasksPartial.cshtml
-         * IM NOT DELETING TamplateTasks/Index.cshtml
-         * TO MAKE SURE NOTHING BREAKS. BUT DONT USE THAT FILE ANYMORE ◀◀◀◀◀◀◀
-         * THANKS
-         * ALON
-         */
 
         // GET: TamplateTasks
         public ActionResult Index()

@@ -68,23 +68,28 @@
                                 <!--
     -->
                                 <!--@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })-->
-                            </nav>
                             <div class="user d-flex align-items-center" style="margin-right:39px">
+                            </nav>
                                 @*  <span id="email" class="email"></span>
         <a class="nav-btn" href="@Url.Action("Settings", "Home")">
             <img src="~/Images/settings-icon.svg">
         </a>*@
+                                    @{ if (User.IsInRole("Client") || User.IsInRole("Admin"))
+                                        {
                                 <div class="profile-div">
                                     <div role="button" id="dropdownLogOffButton" data-toggle="dropdown" data-offset="15 10" aria-haspopup="true" aria-expanded="false">
                                         <img src="~/Images/user.svg" alt="user icon">
                                     </div>
-                                    <div class="d-flex justify-content-end">
-                                        <div class="dropdown-menu" aria-labelledby="dropdownLogOffButton">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="dropdown-menu" aria-labelledby="dropdownLogOffButton">
 
-                                            <a class="dropdown-item" href="@Url.Action("Login", "Account")">Log Off</a>
-                                        </div>
-                                    </div>
+                                                    <a class="dropdown-item" href="@Url.Action("Login", "Account")">Log Off</a>
+                                                </div>
+                                            </div>
+
                                 </div>
+                                        }
+                                    }
                             </div>
                             <div class="menu dropleft d-flex justify-content-end">
                                 <div class="add-btn" role="button" id="dropdownMenuButton" data-toggle="dropdown" data-offset="15 10" aria-haspopup="true" aria-expanded="false">
