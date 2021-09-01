@@ -48,6 +48,8 @@ namespace IpWebApp.Controllers
             }
             return View(clients);
         }
+
+        //this function return a list of record by client id
         [Authorize]
         public ActionResult RecordsByClientId(int id)
         {

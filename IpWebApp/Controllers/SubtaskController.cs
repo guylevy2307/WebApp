@@ -91,6 +91,7 @@ namespace IpWebApp.Controllers
             {
                 return HttpNotFound();
             }
+            //checking if there is permission to the user for edit
             if (!(subtask.creatorId.Equals(User.Identity.Name)) || User.IsInRole("Admin"))
             {
                 return RedirectToAction("NoPremission", "Home");
