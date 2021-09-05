@@ -20,7 +20,7 @@ namespace IpWebApp.Controllers
         public ActionResult Index(string searchStr, string onBalance, string balanceKey, string balance)
         {
             var clients = db.Client.ToList();
-            if (onBalance != null)
+            if (onBalance != null&&balance!=null)
             {
                 double b=double.Parse(balance);
                 if (b!=null)

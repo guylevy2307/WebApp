@@ -23,22 +23,22 @@ namespace IpWebApp
                 new SqlServerStorageOptions { QueuePollInterval = TimeSpan.FromSeconds(1) });
             createRolesandUsers();
 
-            //app.UseHangfireDashboard();
-            //using (var connection = JobStorage.Current.GetConnection())
-            //{
-            //    foreach (var recurringJob in connection.GetRecurringJobs())
-            //    {
-            //        RecurringJob.RemoveIfExists(recurringJob.Id);
-            //    }
-            //}
-            ////BackgroundJob.Enqueue(() => Console.WriteLine("fire-and-forget!") );
-            //app.UseHangfireServer();
+            app.UseHangfireDashboard();
+            using (var connection = JobStorage.Current.GetConnection())
+            {
+                foreach (var recurringJob in connection.GetRecurringJobs())
+                {
+                    RecurringJob.RemoveIfExists(recurringJob.Id);
+                }
+            }
+            //BackgroundJob.Enqueue(() => Console.WriteLine("fire-and-forget!") );
+            app.UseHangfireServer();
 
-            //Engine.Notification temp = new Engine.Notification();
-            ////  RecurringJob.AddOrUpdate(() => temp.SendEmail(),Cron.Minutely());
-            //RecurringJob.AddOrUpdate(() => temp.SendEmail(), Cron.Daily(9));
+            Engine.Notification temp = new Engine.Notification();
+            //  RecurringJob.AddOrUpdate(() => temp.SendEmail(),Cron.Minutely());
+            RecurringJob.AddOrUpdate(() => temp.SendEmail(), Cron.Daily(16));
 
-           
+
         }
         // In this method we will create default User roles and Admin user for login    
         private void createRolesandUsers()
